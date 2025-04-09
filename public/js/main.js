@@ -55,6 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
     async function loadRequests() {
         try {
             const response = await fetch('/api/requests');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const requests = await response.json();
             
             const tableBody = document.getElementById('requestsTableBody');
@@ -63,10 +66,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            if (!Array.isArray(requests)) {
+                console.error('Invalid response format:', requests);
+                return;
+            }
+
             tableBody.innerHTML = requests.map(request => `
                 <tr>
-                    <td>${formatDate(request.submissionDate)}</td>
-                    <td>${request.project || '-'}</td>
+                    <td>${formatDate(request.submissionDate || request.timestamp)}</td>
+                    <td>${request.project || request.area || '-'}</td>
                     <td>${request.title || '-'}</td>
                     <td>${request.status || 'New'}</td>
                     <td>${request.priority || '-'}</td>
@@ -78,6 +86,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } catch (error) {
             console.error('Error loading requests:', error);
+            const tableBody = document.getElementById('requestsTableBody');
+            if (tableBody) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="error-message">
+                            Error loading requests. Please try again later.
+                        </td>
+                    </tr>
+                `;
+            }
         }
     }
 
@@ -104,8 +122,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Helper function to format dates
     function formatDate(dateString) {
+        if (!dateString) return '-';
         const date = new Date(dateString);
-        return date.toLocaleDateString('sv-SE');
+        if (isNaN(date.getTime())) return dateString;
+        return date.toLocaleDateString();
     }
 
     // Helper function to show status messages

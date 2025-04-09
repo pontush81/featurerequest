@@ -1,19 +1,18 @@
 const express = require('express');
 const { Octokit } = require('@octokit/rest');
 const path = require('path');
-const fs = require('fs');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// GitHub setup
+// GitHub configuration
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN
 });
 
-const OWNER = 'pontush81';
-const REPO = 'featurerequest';
-const FILE_PATH = 'data/requests.json';
+const owner = 'pontush81';
+const repo = 'featurerequest';
+const filePath = 'data/requests.json';
 
 // Middleware
 app.use(express.json());
@@ -21,13 +20,13 @@ app.use(express.json());
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Get file content from GitHub
+// Function to get file content from GitHub
 async function getFileContent() {
     try {
         const response = await octokit.repos.getContent({
-            owner: OWNER,
-            repo: REPO,
-            path: FILE_PATH,
+            owner,
+            repo,
+            path: filePath,
         });
 
         const content = Buffer.from(response.data.content, 'base64').toString();
@@ -46,66 +45,58 @@ async function getFileContent() {
     }
 }
 
-// Update file content on GitHub
-async function updateFileContent(content, sha = null) {
-    const message = sha 
-        ? 'Update requests data'
-        : 'Create requests data file';
+// Function to update file content on GitHub
+async function updateFileContent(newContent, sha) {
+    const message = 'Update requests data';
+    const content = Buffer.from(JSON.stringify(newContent, null, 2)).toString('base64');
 
-    return octokit.repos.createOrUpdateFileContents({
-        owner: OWNER,
-        repo: REPO,
-        path: FILE_PATH,
+    const params = {
+        owner,
+        repo,
+        path: filePath,
         message,
-        content: Buffer.from(JSON.stringify(content, null, 2)).toString('base64'),
-        sha
-    });
+        content,
+        ...(sha && { sha })
+    };
+
+    await octokit.repos.createOrUpdateFileContents(params);
 }
 
-// Get all requests
+// API Routes
 app.get('/api/requests', async (req, res) => {
     try {
-        const content = await fs.readFile(FILE_PATH, 'utf8');
-        const data = JSON.parse(content);
-        res.json(data.requests || []);
+        const { content } = await getFileContent();
+        res.json(content.requests);
     } catch (error) {
         console.error('Error reading requests:', error);
-        res.status(500).json({ error: 'Error reading requests' });
+        res.status(500).json({ 
+            error: 'Failed to read requests',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
     }
 });
 
-// Save request endpoint
 app.post('/api/save-request', async (req, res) => {
     try {
-        let data = { requests: [] };
+        const { content, sha } = await getFileContent();
         
-        // Read existing data if file exists
-        try {
-            const content = await fs.readFile(FILE_PATH, 'utf8');
-            data = JSON.parse(content);
-        } catch (error) {
-            console.log('No existing data file, creating new one');
-        }
-
-        // Create new request object
-        const newRequest = {
+        const requestData = {
             ...req.body,
             id: Date.now().toString(),
             timestamp: new Date().toISOString(),
             status: 'New'
         };
 
-        // Add to requests array
-        data.requests = data.requests || [];
-        data.requests.push(newRequest);
+        content.requests.push(requestData);
+        await updateFileContent(content, sha);
 
-        // Save to GitHub
-        await updateFileContent(data);
-
-        res.json(newRequest);
+        res.status(201).json(requestData);
     } catch (error) {
         console.error('Error saving request:', error);
-        res.status(500).json({ error: 'Error saving request' });
+        res.status(500).json({ 
+            error: 'Failed to save request',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
     }
 });
 
