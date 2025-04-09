@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             // Get form data
+            const businessValueScores = getBusinessValueScores();
             const formData = {
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
@@ -26,8 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 requesterName: document.getElementById('requesterName').value,
                 requesterEmail: document.getElementById('requesterEmail').value,
                 submissionDate: new Date().toISOString().split('T')[0],
-                businessValueScores: getBusinessValueScores(),
-                businessValue: calculateBusinessValueSummary(getBusinessValueScores()) // Add calculated summary
+                businessValueScores: businessValueScores,
+                businessValue: calculateBusinessValueSummary(businessValueScores), // Text summary
+                businessValueTotal: calculateBusinessValueTotal(businessValueScores) // Numeric total
             };
 
             console.log('Submitting form data:', formData);
@@ -125,8 +127,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return request.businessValue || '-';
         }
 
-        // Calculate total score from all categories
-        const total = Object.values(request.businessValueScores).reduce((sum, score) => sum + score, 0);
+        // Use businessValueTotal if available, otherwise calculate it
+        const total = request.businessValueTotal || 
+            Object.values(request.businessValueScores).reduce((sum, score) => sum + score, 0);
+        
         console.log('Total score:', total); // Debug log
         
         if (total === 0) {

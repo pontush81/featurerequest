@@ -58,9 +58,14 @@ function getBusinessValueScores() {
     return scores;
 }
 
+// Calculate business value total (numeric)
+function calculateBusinessValueTotal(scores) {
+    return Object.values(scores).reduce((sum, score) => sum + score, 0);
+}
+
 // Calculate business value summary text
 function calculateBusinessValueSummary(scores) {
-    const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
+    const totalScore = calculateBusinessValueTotal(scores);
     const activeCategories = Object.entries(scores)
         .filter(([_, score]) => score > 0)
         .map(([category, score]) => {
