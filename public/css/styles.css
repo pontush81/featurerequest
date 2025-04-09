@@ -429,4 +429,54 @@ h3 {
     .praised-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Business Value Summary styles */
+.business-value-summary {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.total-score {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.categories-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 4px;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+}
+
+.category-item .category-name {
+    color: #374151;
+    font-weight: 500;
+}
+
+.category-item .category-score {
+    background-color: #6366f1;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 500;
+}
+
+.category-item.no-impact {
+    opacity: 0.5;
 } 
