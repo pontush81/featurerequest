@@ -56,79 +56,109 @@
             </div>
 
             <div class="form-group">
-                <label>Business Value (PRAISED)</label>
-                <div class="praised-categories">
-                    <div class="praised-category">
-                        <input type="checkbox" id="praised_productivity">
-                        <label for="praised_productivity">Productivity gains</label>
-                        <select id="productivity_rating" disabled>
-                            <option value="0">Ingen påverkan</option>
-                            <option value="1">Låg påverkan</option>
-                            <option value="2">Medel påverkan</option>
-                            <option value="3">Hög påverkan</option>
+                <h3>Business Value Categories (PRAISED)</h3>
+                <p class="subtext">Bedöm varje kategori från 0 (ingen påverkan) till 4 (högsta påverkan)</p>
+                
+                <div class="praised-grid">
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_productivity" id="praised_productivity">
+                            Productivity gains
+                        </label>
+                        <select name="productivity_rating" id="productivity_rating">
+                            <option value="0">0 - Ingen påverkan</option>
+                            <option value="1">1 - Låg påverkan</option>
+                            <option value="2">2 - Medel påverkan</option>
+                            <option value="3">3 - Hög påverkan</option>
+                            <option value="4">4 - Högsta påverkan</option>
                         </select>
                     </div>
-                    <div class="praised-category">
-                        <input type="checkbox" id="praised_reduced">
-                        <label for="praised_reduced">Reduced costs</label>
-                        <select id="reduced_rating" disabled>
-                            <option value="0">Ingen påverkan</option>
-                            <option value="1">Låg påverkan</option>
-                            <option value="2">Medel påverkan</option>
-                            <option value="3">Hög påverkan</option>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_reduced" id="praised_reduced">
+                            Reduced costs
+                        </label>
+                        <select name="reduced_rating" id="reduced_rating">
+                            <option value="0">0 - Ingen påverkan</option>
+                            <option value="1">1 - Låg påverkan</option>
+                            <option value="2">2 - Medel påverkan</option>
+                            <option value="3">3 - Hög påverkan</option>
+                            <option value="4">4 - Högsta påverkan</option>
                         </select>
                     </div>
-                    <div class="praised-category">
-                        <input type="checkbox" id="praised_avoided">
-                        <label for="praised_avoided">Avoided costs</label>
-                        <select id="avoided_rating" disabled>
-                            <option value="0">Ingen påverkan</option>
-                            <option value="1">Låg påverkan</option>
-                            <option value="2">Medel påverkan</option>
-                            <option value="3">Hög påverkan</option>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_avoided" id="praised_avoided">
+                            Avoided costs
+                        </label>
+                        <select name="avoided_rating" id="avoided_rating">
+                            <option value="0">0 - Ingen påverkan</option>
+                            <option value="1">1 - Låg påverkan</option>
+                            <option value="2">2 - Medel påverkan</option>
+                            <option value="3">3 - Hög påverkan</option>
+                            <option value="4">4 - Högsta påverkan</option>
                         </select>
                     </div>
-                    <div class="praised-category">
-                        <input type="checkbox" id="praised_increased">
-                        <label for="praised_increased">Increased revenue</label>
-                        <select id="increased_rating" disabled>
-                            <option value="0">Ingen påverkan</option>
-                            <option value="1">Låg påverkan</option>
-                            <option value="2">Medel påverkan</option>
-                            <option value="3">Hög påverkan</option>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_increased" id="praised_increased">
+                            Increased revenue
+                        </label>
+                        <select name="increased_rating" id="increased_rating">
+                            <option value="0">0 - Ingen påverkan</option>
+                            <option value="1">1 - Låg påverkan</option>
+                            <option value="2">2 - Medel påverkan</option>
+                            <option value="3">3 - Hög påverkan</option>
+                            <option value="4">4 - Högsta påverkan</option>
                         </select>
                     </div>
-                    <div class="praised-category">
-                        <input type="checkbox" id="praised_service">
-                        <label for="praised_service">Service level improvements</label>
-                        <select id="service_rating" disabled>
-                            <option value="0">Ingen påverkan</option>
-                            <option value="1">Låg påverkan</option>
-                            <option value="2">Medel påverkan</option>
-                            <option value="3">Hög påverkan</option>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_service" id="praised_service">
+                            Service level improvements
+                        </label>
+                        <select name="service_rating" id="service_rating">
+                            <option value="0">0 - Ingen påverkan</option>
+                            <option value="1">1 - Låg påverkan</option>
+                            <option value="2">2 - Medel påverkan</option>
+                            <option value="3">3 - Hög påverkan</option>
+                            <option value="4">4 - Högsta påverkan</option>
                         </select>
                     </div>
-                    <div class="praised-category">
-                        <input type="checkbox" id="praised_enhanced">
-                        <label for="praised_enhanced">Enhanced quality</label>
-                        <select id="enhanced_rating" disabled>
-                            <option value="0">Ingen påverkan</option>
-                            <option value="1">Låg påverkan</option>
-                            <option value="2">Medel påverkan</option>
-                            <option value="3">Hög påverkan</option>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_enhanced" id="praised_enhanced">
+                            Enhanced quality
+                        </label>
+                        <select name="enhanced_rating" id="enhanced_rating">
+                            <option value="0">0 - Ingen påverkan</option>
+                            <option value="1">1 - Låg påverkan</option>
+                            <option value="2">2 - Medel påverkan</option>
+                            <option value="3">3 - Hög påverkan</option>
+                            <option value="4">4 - Högsta påverkan</option>
                         </select>
                     </div>
-                    <div class="praised-category">
-                        <input type="checkbox" id="praised_differentiation">
-                        <label for="praised_differentiation">Differentiation in the marketplace</label>
-                        <select id="differentiation_rating" disabled>
-                            <option value="0">Ingen påverkan</option>
-                            <option value="1">Låg påverkan</option>
-                            <option value="2">Medel påverkan</option>
-                            <option value="3">Hög påverkan</option>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_differentiation" id="praised_differentiation">
+                            Differentiation in the marketplace
+                        </label>
+                        <select name="differentiation_rating" id="differentiation_rating">
+                            <option value="0">0 - Ingen påverkan</option>
+                            <option value="1">1 - Låg påverkan</option>
+                            <option value="2">2 - Medel påverkan</option>
+                            <option value="3">3 - Hög påverkan</option>
+                            <option value="4">4 - Högsta påverkan</option>
                         </select>
                     </div>
                 </div>
+                <p class="subtext">Välj och bedöm tillämpliga kategorier för detta önskemål.</p>
             </div>
 
             <input type="hidden" id="submissionDate" name="submissionDate">
