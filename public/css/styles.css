@@ -233,24 +233,25 @@ textarea:focus {
 .requests-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
-    background-color: var(--card-background);
-    border-radius: var(--radius);
+    margin-top: 2rem;
+    background: white;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .requests-table th,
 .requests-table td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: top;
 }
 
 .requests-table th {
-    background-color: var(--background-color);
+    background-color: #f8f9fa;
     font-weight: 600;
-    color: var(--text-color);
+    color: #374151;
 }
 
 .requests-table tr:last-child td {
@@ -258,7 +259,7 @@ textarea:focus {
 }
 
 .requests-table tr:hover {
-    background-color: var(--background-color);
+    background-color: #f9fafb;
 }
 
 /* Form actions */
@@ -479,4 +480,15 @@ h3 {
 
 .category-item.no-impact {
     opacity: 0.5;
+}
+
+.business-value-cell {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.business-value-cell strong {
+    color: #4f46e5;
+    display: inline-block;
+    margin-bottom: 0.25rem;
 } 

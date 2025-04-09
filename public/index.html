@@ -164,19 +164,6 @@ Currently, we can only see all tasks in a list, making it difficult to track ind
             </div>
 
             <div class="form-group">
-                <h3>Business Value Summary</h3>
-                <div class="business-value-summary">
-                    <div class="total-score">
-                        <span>Total Score: </span>
-                        <span id="totalScore">0</span>
-                    </div>
-                    <div class="categories-summary" id="categoriesSummary">
-                        <!-- Filled by JavaScript -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
                 <label for="priority">Prioritet</label>
                 <select id="priority" name="priority" required>
                     <option value="">Välj prioritet</option>
@@ -207,7 +194,21 @@ Currently, we can only see all tasks in a list, making it difficult to track ind
         
         <div id="requestsList">
             <h2>Inskickade önskemål</h2>
-            <div id="requestsTableContainer"></div>
+            <table class="requests-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Project</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Priority</th>
+                        <th>Business Value</th>
+                    </tr>
+                </thead>
+                <tbody id="requestsTableBody">
+                    <!-- Filled by JavaScript -->
+                </tbody>
+            </table>
         </div>
     </main>
 
@@ -227,12 +228,8 @@ Currently, we can only see all tasks in a list, making it difficult to track ind
             { id: 'differentiation', name: 'Differentiation in the marketplace' }
         ];
 
-        function updateBusinessValueSummary() {
-            const totalScoreElement = document.getElementById('totalScore');
-            const categoriesSummaryElement = document.getElementById('categoriesSummary');
+        function getBusinessValueSummary() {
             let totalScore = 0;
-            
-            // Collect scores for each category
             const categoryScores = categories.map(category => {
                 const checkbox = document.getElementById(`praised_${category.id}`);
                 const select = document.getElementById(`${category.id}_rating`);
@@ -244,39 +241,58 @@ Currently, we can only see all tasks in a list, making it difficult to track ind
                 };
             });
 
-            // Update total score
-            totalScoreElement.textContent = totalScore;
-
-            // Sort categories by score (highest first) and create summary HTML
+            // Sort categories by score (highest first)
             const sortedCategories = categoryScores
-                .sort((a, b) => b.score - a.score)
-                .map(category => {
-                    const noImpactClass = category.score === 0 ? 'no-impact' : '';
-                    return `
-                        <div class="category-item ${noImpactClass}">
-                            <span class="category-name">${category.name}</span>
-                            <span class="category-score">${category.score}</span>
-                        </div>
-                    `;
-                })
-                .join('');
+                .filter(category => category.score > 0)
+                .sort((a, b) => b.score - a.score);
 
-            categoriesSummaryElement.innerHTML = sortedCategories;
+            return {
+                total: totalScore,
+                categories: sortedCategories
+            };
         }
 
-        // Add event listeners to all checkboxes and selects
+        function updateBusinessValueCell(cell, summary) {
+            if (summary.total === 0) {
+                cell.innerHTML = '-';
+                return;
+            }
+
+            const categoryList = summary.categories
+                .map(category => `${category.name}: ${category.score}`)
+                .join('<br>');
+
+            cell.innerHTML = `
+                <div class="business-value-cell">
+                    <strong>Total: ${summary.total}</strong><br>
+                    ${categoryList}
+                </div>
+            `;
+        }
+
+        // Remove the old summary section
+        const oldSummarySection = document.querySelector('.business-value-summary');
+        if (oldSummarySection) {
+            oldSummarySection.parentElement.remove();
+        }
+
+        // Add event listeners to update the table cell when values change
         categories.forEach(category => {
             const checkbox = document.getElementById(`praised_${category.id}`);
             const select = document.getElementById(`${category.id}_rating`);
             
             if (checkbox && select) {
-                checkbox.addEventListener('change', updateBusinessValueSummary);
-                select.addEventListener('change', updateBusinessValueSummary);
+                const updateHandler = () => {
+                    const cells = document.querySelectorAll('.business-value-cell');
+                    cells.forEach(cell => {
+                        updateBusinessValueCell(cell.parentElement, getBusinessValueSummary());
+                    });
+                };
+                
+                checkbox.addEventListener('change', updateHandler);
+                select.addEventListener('change', updateHandler);
             }
         });
-
-        // Initial update
-        updateBusinessValueSummary();
     </script>
 </body>
 </html>
