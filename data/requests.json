@@ -71,6 +71,29 @@
       "id": "1744204035928",
       "timestamp": "2025-04-09T13:07:15.928Z",
       "status": "New"
+    },
+    {
+      "title": "mycket saker",
+      "description": "skdf.,sdf",
+      "project": "Kontek HRM",
+      "acceptanceCriteria": "sdsdf",
+      "requesterName": "Pontus",
+      "requesterEmail": "pontus.hberg@gmail.com",
+      "submissionDate": "2025-04-09",
+      "businessValueScores": {
+        "productivity": 4,
+        "reduced": 0,
+        "avoided": 0,
+        "increased": 0,
+        "service": 0,
+        "enhanced": 4,
+        "differentiation": 0
+      },
+      "businessValue": "Total Score: 8\nProductivity gains: 4\nEnhanced quality: 4",
+      "businessValueTotal": 8,
+      "id": "1744204773470",
+      "timestamp": "2025-04-09T13:19:33.470Z",
+      "status": "New"
     }
   ]
 }
