@@ -203,11 +203,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Helper function to show status messages
-    function showStatusMessage(message, type) {
+    function showMessage(message, type) {
+        const statusMessage = document.getElementById('statusMessage');
+        if (!statusMessage) {
+            console.error('Status message element not found');
+            alert(message); // Fallback to alert if element not found
+            return;
+        }
+        
         statusMessage.textContent = message;
-        statusMessage.className = `status-message ${type}`;
+        statusMessage.className = `status-message ${type || 'info'}`;
+        
+        // Make sure the message is visible
+        statusMessage.style.display = 'block';
+        
+        // Auto-hide after 5 seconds
         setTimeout(() => {
             statusMessage.className = 'status-message';
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 500);
         }, 5000);
     }
 }); 

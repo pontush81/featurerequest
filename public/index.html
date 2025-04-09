@@ -211,6 +211,43 @@ Currently, we can only see all tasks in a list, making it difficult to track ind
         <p>Kontek Feature Request Portal &copy; 2024</p>
     </footer>
 
+    <script>
+        // Override storage methods to prevent errors
+        (function() {
+            try {
+                // Attempt to access localStorage to check if it's available
+                window.localStorage.getItem('test');
+            } catch (e) {
+                // Create a memory-based storage fallback
+                var memoryStorage = {};
+                var noop = function() {};
+                
+                // Replace localStorage with a dummy object
+                window.localStorage = {
+                    getItem: function(key) { return memoryStorage[key] || null; },
+                    setItem: function(key, value) { memoryStorage[key] = value; },
+                    removeItem: function(key) { delete memoryStorage[key]; },
+                    clear: function() { memoryStorage = {}; },
+                    key: function(i) { return Object.keys(memoryStorage)[i] || null; },
+                    length: 0
+                };
+                
+                // Same for sessionStorage
+                window.sessionStorage = {
+                    getItem: function(key) { return null; },
+                    setItem: noop,
+                    removeItem: noop,
+                    clear: noop,
+                    key: function() { return null; },
+                    length: 0
+                };
+                
+                console.log('Storage API not available, using memory fallback');
+            }
+        })();
+    </script>
+    
+    <script src="js/praised.js"></script>
     <script src="js/main.js"></script>
     <script>
         const categories = [
