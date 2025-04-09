@@ -116,9 +116,17 @@ textarea:focus {
     border: 1px solid #e5e7eb;
     border-radius: 4px;
     font-size: 1rem;
-    min-height: 120px;
+    min-height: 200px;
     resize: vertical;
     margin-bottom: 0;
+    color: #374151;
+}
+
+.form-group textarea::placeholder {
+    color: #6b7280;
+    opacity: 0.8;
+    font-family: monospace;
+    white-space: pre-wrap;
 }
 
 .form-group textarea:focus {
@@ -356,18 +364,6 @@ footer {
 
 .value-rating:not(:disabled):hover {
     border-color: var(--primary-color);
-}
-
-.example-text {
-    background-color: #f8f9fa;
-    border-left: 4px solid #6366f1;
-    padding: 1rem;
-    margin-top: 0.5rem;
-    font-family: monospace;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    color: #4b5563;
 }
 
 /* PRAISED section styles */
