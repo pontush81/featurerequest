@@ -62,14 +62,28 @@
             <div class="form-section">
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <textarea id="description" required placeholder="Detailed description of what you need"></textarea>
-                    <small class="help-text">Describe the feature or change you're requesting in detail.</small>
+                    <textarea id="description" required placeholder="As a [type of user], I want [some goal] so that [some reason].
+
+Example:
+As a project manager, I want to be able to filter tasks by assignee so that I can quickly see what each team member is working on.
+
+Background:
+Currently, we can only see all tasks in a list, making it difficult to track individual workloads."></textarea>
+                    <small class="help-text">Describe the feature or change you're requesting in detail using the user story format.</small>
                 </div>
                 
                 <div class="form-group">
                     <label for="acceptanceCriteria">Acceptance Criteria:</label>
-                    <textarea id="acceptanceCriteria" required placeholder="List the criteria that must be met"></textarea>
-                    <small class="help-text">What specific conditions must be satisfied for this request to be considered complete?</small>
+                    <textarea id="acceptanceCriteria" required placeholder="List specific, testable conditions that must be met. Example:
+
+1. A dropdown filter for assignees is available in the task list view
+2. The filter shows all team members who have tasks assigned
+3. Selecting an assignee immediately updates the task list
+4. The filter persists when navigating away and back
+5. A 'Clear Filter' option is available
+6. The current filter is visible in the URL for sharing
+7. The system handles cases where an assignee is removed but had tasks"></textarea>
+                    <small class="help-text">What specific conditions must be satisfied? Be detailed and testable.</small>
                 </div>
             </div>
             
