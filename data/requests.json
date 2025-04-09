@@ -47,6 +47,30 @@
       "id": "1744203689333",
       "timestamp": "2025-04-09T13:01:29.333Z",
       "status": "New"
+    },
+    {
+      "title": "Bra saker",
+      "description": "sdfsdf",
+      "project": "Interna verktyg",
+      "priority": "Låg",
+      "acceptanceCriteria": "sdfsdf",
+      "requesterName": "Pontus",
+      "requesterEmail": "pontus.hberg@gmail.com",
+      "submissionDate": "2025-04-09",
+      "businessValueScores": {
+        "productivity": 4,
+        "reduced": 4,
+        "avoided": 0,
+        "increased": 0,
+        "service": 0,
+        "enhanced": 0,
+        "differentiation": 0
+      },
+      "businessValue": "Total Score: 8\nProductivity gains: 4\nReduced costs: 4",
+      "businessValueTotal": 8,
+      "id": "1744204035928",
+      "timestamp": "2025-04-09T13:07:15.928Z",
+      "status": "New"
     }
   ]
 }
