@@ -121,10 +121,10 @@ app.post('/api/save-request', async (req, res) => {
         console.log('POST /api/save-request called with data:', req.body);
         
         // Validate required fields
-        if (!req.body.title || !req.body.description || !req.body.area) {
+        if (!req.body.title || !req.body.description || !req.body.project) {
             return res.status(400).json({ 
                 error: 'Missing required fields',
-                details: 'Title, description, and area are required'
+                details: 'Title, description, and project are required'
             });
         }
 

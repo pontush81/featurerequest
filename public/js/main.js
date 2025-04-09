@@ -122,6 +122,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            if (requests.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 20px;">
+                            Inga önskemål har skickats in ännu.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
             tableBody.innerHTML = requests.map(request => {
                 console.log('Processing request:', request); // Debug log
                 const businessValue = formatBusinessValue(request);
@@ -137,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     </tr>
                 `;
             }).join('');
-
         } catch (error) {
             console.error('Error loading requests:', error);
             const tableBody = document.getElementById('requestsTableBody');
