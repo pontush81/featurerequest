@@ -516,4 +516,12 @@ h3 {
 
 .danger-button:active {
     background-color: #bd2130;
+}
+
+/* Table info text */
+.table-info {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 1rem 0;
+    font-style: italic;
 } 

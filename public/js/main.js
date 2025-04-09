@@ -133,6 +133,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // Sort requests by business value (highest first)
+            requests.sort((a, b) => {
+                const valueA = a.businessValueTotal || 
+                    (a.businessValueScores ? Object.values(a.businessValueScores).reduce((sum, score) => sum + score, 0) : 0);
+                const valueB = b.businessValueTotal || 
+                    (b.businessValueScores ? Object.values(b.businessValueScores).reduce((sum, score) => sum + score, 0) : 0);
+                return valueB - valueA; // Sort descending (highest first)
+            });
+
             tableBody.innerHTML = requests.map(request => {
                 console.log('Processing request:', request); // Debug log
                 const businessValue = formatBusinessValue(request);
@@ -196,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Scores list:', scoresList); // Debug log
 
         return `
-            <strong>Total: ${total}</strong>
+            <strong style="color: #4338ca; font-size: 1.1em;">Total: ${total}</strong>
             ${scoresList ? '<br>' + scoresList : ''}
         `;
     }
