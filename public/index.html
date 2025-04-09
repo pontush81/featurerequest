@@ -3,138 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontek Feature Request Portal</title>
+    <title>Önskemål</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" type="image/png" href="https://www.kontek.se/favicon.ico">
 </head>
 <body>
     <header>
-        <h1>Kontek Feature Request Portal</h1>
-        <p class="subtitle">Submit and track feature requests for Kontek projects</p>
+        <h1>Önskemål</h1>
+        <p class="subtitle">Skicka in dina önskemål</p>
     </header>
     
     <main>
-        <form id="requestForm" class="feature-request-form">
-            <div class="form-section">
-                <div class="form-group">
-                    <label for="project">Project:</label>
-                    <select id="project" required>
-                        <option value="" disabled selected>Select project</option>
-                        <option value="KID">Kontek in Development</option>
-                        <option value="KOAC">Kontek Academy</option>
-                        <option value="KCIM">Kontek Continuous Improvement</option>
-                        <option value="KOINT">Kontek Integrations</option>
-                        <option value="KOIN">Kontek Integrator</option>
-                        <option value="KIIT">Kontek Internal IT</option>
-                        <option value="KOOP">Kontek Operations</option>
-                        <option value="KONP">Kontek Pangea</option>
-                        <option value="KOSEC">Kontek Security</option>
-                        <option value="KOTO">Kontek Tools</option>
-                        <option value="KOUM">Kontek Umbrella</option>
-                        <option value="KOWH">Kontek Whistle</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" required placeholder="Brief summary of your request">
-                </div>
+        <form id="requestForm">
+            <div class="form-group">
+                <label for="project">Välj område (exempel):</label>
+                <select id="project" name="project" required>
+                    <option value="">Välj område</option>
+                    <option value="Kontek Lön">Kontek Lön</option>
+                    <option value="Kontek HRM">Kontek HRM</option>
+                    <option value="Interna verktyg">Interna verktyg</option>
+                </select>
             </div>
-            
-            <div class="form-section">
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea id="description" required placeholder="Detailed description of what you need"></textarea>
-                    <small class="help-text">Describe the feature or change you're requesting in detail.</small>
-                </div>
+
+            <div class="form-group">
+                <label for="title">Titel</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <div class="example-text">Example:<br>
+                As a project manager, I want to be able to filter tasks by assignee so that I can quickly see what each team member is working on.<br><br>
+                Background:<br>
+                Currently, we can only see all tasks in a list, making it difficult to track individual workloads.</div>
+                <textarea id="description" name="description" required placeholder="Describe the feature or change you're requesting in detail using the user story format."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="acceptanceCriteria">Acceptanskriterier</label>
+                <div class="example-text">List specific, testable conditions that must be met. Example:
+
+1. A dropdown filter for assignees is available in the task list view
+2. The filter shows all team members who have tasks assigned
+3. Selecting an assignee immediately updates the task list
+4. The filter persists when navigating away and back
+5. A 'Clear Filter' option is available</div>
+                <textarea id="acceptanceCriteria" name="acceptanceCriteria" required placeholder="Lista specifika, testbara villkor som måste uppfyllas för att önskemålet ska anses vara klart."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="businessValue">Affärsvärde</label>
+                <div class="example-text">Explain the value this brings to the business</div>
+                <textarea id="businessValue" name="businessValue" required placeholder="Beskriv vilket värde detta tillför verksamheten."></textarea>
+            </div>
+
+            <div class="form-group">
+                <h3>Business Value Categories (PRAISED)</h3>
+                <p class="subtext">Rate each category from 0 (no impact) to 4 (highest impact)</p>
                 
-                <div class="form-group">
-                    <label for="acceptanceCriteria">Acceptance Criteria:</label>
-                    <textarea id="acceptanceCriteria" required placeholder="List the criteria that must be met"></textarea>
-                    <small class="help-text">What specific conditions must be satisfied for this request to be considered complete?</small>
-                </div>
-            </div>
-            
-            <div class="form-section">
-                <div class="form-group">
-                    <label for="businessValue">Business Value Description:</label>
-                    <textarea id="businessValue" required placeholder="Explain the value this brings to the business"></textarea>
-                    <small class="help-text">How will this benefit the organization or users?</small>
-                </div>
-
-                <div class="form-group">
-                    <label>Business Value Categories (PRAISED):</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="productivity" name="businessValueTypes" value="productivity">
-                            <label for="productivity">Productivity gains (produktivitetsökning)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="reduced" name="businessValueTypes" value="reduced">
-                            <label for="reduced">Reduced costs (minskade kostnader)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="avoided" name="businessValueTypes" value="avoided">
-                            <label for="avoided">Avoided costs (undvikna kostnader)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="increased" name="businessValueTypes" value="increased">
-                            <label for="increased">Increased revenue (ökade intäkter)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="service" name="businessValueTypes" value="service">
-                            <label for="service">Service level improvements (förbättrad servicenivå)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="enhanced" name="businessValueTypes" value="enhanced">
-                            <label for="enhanced">Enhanced quality (förbättrad kvalitet)</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="differentiation" name="businessValueTypes" value="differentiation">
-                            <label for="differentiation">Differentiation in the marketplace (differentiering på marknaden)</label>
-                        </div>
+                <div class="praised-grid">
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_productivity" id="praised_productivity">
+                            Productivity gains
+                        </label>
+                        <select name="productivity_rating" id="productivity_rating">
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Minor impact</option>
+                            <option value="2">2 - Moderate impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
+                        </select>
                     </div>
-                    <small class="help-text">Select all applicable business value categories for this request.</small>
-                </div>
-            </div>
-            
-            <div class="form-section">
-                <div class="form-group">
-                    <label for="priority">Priority:</label>
-                    <select id="priority" required>
-                        <option value="" disabled selected>Select priority</option>
-                        <option value="highest">Highest - Critical Impact</option>
-                        <option value="high">High - Significant Impact</option>
-                        <option value="medium">Medium - Moderate Impact</option>
-                        <option value="low">Low - Minor Impact</option>
-                        <option value="lowest">Lowest - Minimal Impact</option>
-                    </select>
-                    <small class="help-text">Select based on business impact and urgency</small>
-                </div>
 
-                <div class="form-group">
-                    <label for="requesterName">Your Name:</label>
-                    <input type="text" id="requesterName" required>
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_reduced" id="praised_reduced">
+                            Reduced costs
+                        </label>
+                        <select name="reduced_rating" id="reduced_rating">
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Minor impact</option>
+                            <option value="2">2 - Moderate impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
+                        </select>
+                    </div>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_avoided" id="praised_avoided">
+                            Avoided costs
+                        </label>
+                        <select name="avoided_rating" id="avoided_rating">
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Minor impact</option>
+                            <option value="2">2 - Moderate impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
+                        </select>
+                    </div>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_increased" id="praised_increased">
+                            Increased revenue
+                        </label>
+                        <select name="increased_rating" id="increased_rating">
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Minor impact</option>
+                            <option value="2">2 - Moderate impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
+                        </select>
+                    </div>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_service" id="praised_service">
+                            Service level improvements
+                        </label>
+                        <select name="service_rating" id="service_rating">
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Minor impact</option>
+                            <option value="2">2 - Moderate impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
+                        </select>
+                    </div>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_enhanced" id="praised_enhanced">
+                            Enhanced quality
+                        </label>
+                        <select name="enhanced_rating" id="enhanced_rating">
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Minor impact</option>
+                            <option value="2">2 - Moderate impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
+                        </select>
+                    </div>
+
+                    <div class="praised-item">
+                        <label>
+                            <input type="checkbox" name="praised_differentiation" id="praised_differentiation">
+                            Differentiation in the marketplace
+                        </label>
+                        <select name="differentiation_rating" id="differentiation_rating">
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Minor impact</option>
+                            <option value="2">2 - Moderate impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
+                        </select>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="requesterEmail">Your Email:</label>
-                    <input type="email" id="requesterEmail" required>
-                </div>
+                <p class="subtext">Select and rate applicable business value categories for this request.</p>
+            </div>
+
+            <div class="form-group">
+                <label for="priority">Prioritet</label>
+                <select id="priority" name="priority" required>
+                    <option value="">Välj prioritet</option>
+                    <option value="Låg">Låg</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hög">Hög</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="requesterName">Ditt namn</label>
+                <input type="text" id="requesterName" name="requesterName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="requesterEmail">Din e-post</label>
+                <input type="email" id="requesterEmail" name="requesterEmail" required>
             </div>
 
             <input type="hidden" id="submissionDate" name="submissionDate">
 
             <div class="form-actions">
-                <button type="submit" class="btn-primary">Submit Request</button>
-                <button type="reset" class="btn-secondary">Clear Form</button>
+                <button type="submit" class="btn-primary">Skicka önskemål</button>
             </div>
         </form>
 
         <div id="statusMessage" class="status-message"></div>
         
         <div id="requestsList">
-            <h2>Submitted Requests</h2>
+            <h2>Inskickade önskemål</h2>
             <div id="requestsTableContainer"></div>
         </div>
     </main>
