@@ -15,14 +15,20 @@ document.addEventListener('DOMContentLoaded', function() {
     requestForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
+        const businessValueScores = getBusinessValueScores();
+        const businessValueSummary = calculateBusinessValueSummary(businessValueScores);
+
         const formData = {
             title: document.getElementById('title').value,
             description: document.getElementById('description').value,
             area: document.getElementById('area').value,
             priority: document.getElementById('priority').value,
             acceptanceCriteria: document.getElementById('acceptanceCriteria').value,
-            businessValue: document.getElementById('businessValue').value,
-            businessValueScores: getBusinessValueScores()
+            businessValue: businessValueSummary,
+            businessValueScores: businessValueScores,
+            requesterName: document.getElementById('requesterName').value,
+            requesterEmail: document.getElementById('requesterEmail').value,
+            submissionDate: new Date().toISOString().split('T')[0]
         };
 
         try {
@@ -38,8 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Network response was not ok');
             }
 
-            // Clear form
+            // Clear form and reset PRAISED selections
             requestForm.reset();
+            resetPraisedSelections();
             
             // Reload requests list
             loadRequests();
@@ -48,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage('Request submitted successfully!', 'success');
         } catch (error) {
             console.error('Error:', error);
+            showMessage('Error submitting request. Please try again.', 'error');
         }
     });
 
@@ -79,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td>${request.status || 'New'}</td>
                     <td>${request.priority || '-'}</td>
                     <td class="business-value-cell">
-                        ${formatBusinessValue(request.businessValueScores)}
+                        ${formatBusinessValue(request)}
                     </td>
                 </tr>
             `).join('');
@@ -99,13 +107,53 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function formatBusinessValue(scores) {
-        if (!scores || Object.keys(scores).length === 0) {
-            return '-';
+    function getBusinessValueScores() {
+        const scores = {};
+        categories.forEach(category => {
+            const checkbox = document.getElementById(`praised_${category.id}`);
+            const select = document.getElementById(`${category.id}_rating`);
+            if (checkbox && checkbox.checked && select) {
+                scores[category.id] = parseInt(select.value);
+            } else {
+                scores[category.id] = 0;
+            }
+        });
+        return scores;
+    }
+
+    function calculateBusinessValueSummary(scores) {
+        const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
+        const activeCategories = Object.entries(scores)
+            .filter(([_, score]) => score > 0)
+            .map(([category, score]) => {
+                const categoryInfo = categories.find(c => c.id === category);
+                return `${categoryInfo ? categoryInfo.name : category}: ${score}`;
+            });
+
+        if (activeCategories.length === 0) {
+            return 'No business value categories selected';
         }
 
-        const total = Object.values(scores).reduce((sum, score) => sum + score, 0);
-        const scoresList = Object.entries(scores)
+        return `Total Score: ${totalScore}\n${activeCategories.join('\n')}`;
+    }
+
+    function resetPraisedSelections() {
+        categories.forEach(category => {
+            const checkbox = document.getElementById(`praised_${category.id}`);
+            const select = document.getElementById(`${category.id}_rating`);
+            if (checkbox) checkbox.checked = false;
+            if (select) select.value = '0';
+        });
+    }
+
+    function formatBusinessValue(request) {
+        if (!request.businessValueScores || Object.keys(request.businessValueScores).length === 0) {
+            return request.businessValue || '-';
+        }
+
+        const total = Object.values(request.businessValueScores).reduce((sum, score) => sum + score, 0);
+        const scoresList = Object.entries(request.businessValueScores)
+            .filter(([_, score]) => score > 0)
             .map(([category, score]) => {
                 const categoryInfo = categories.find(c => c.id === category);
                 return `${categoryInfo ? categoryInfo.name : category}: ${score}`;
@@ -114,8 +162,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return `
             <div class="business-value-cell">
-                <strong>Total: ${total}</strong><br>
-                ${scoresList}
+                <strong>Total: ${total}</strong>
+                ${scoresList ? '<br>' + scoresList : ''}
             </div>
         `;
     }
