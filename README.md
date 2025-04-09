@@ -1,34 +1,49 @@
-# Wish Request Management
+# Kontek Feature Request Portal
 
-A simple server application for handling and storing requests.
+A web-based portal for submitting and managing feature requests within Kontek.
+
+## Features
+
+- Submit feature requests with detailed information
+- Project selection
+- Priority levels
+- Business value categorization
+- Acceptance criteria
+- Data stored directly in GitHub repository
 
 ## Setup
 
-1. Install dependencies:
-```bash
-npm install
-```
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a GitHub Personal Access Token:
+   - Go to GitHub Settings -> Developer Settings -> Personal Access Tokens
+   - Generate a new token with 'repo' scope
+   - Copy the token
 
-2. Start the server:
-- For production:
-```bash
-npm start
-```
-- For development (with auto-reload):
-```bash
-npm run dev
-```
+4. Set up environment variables:
+   - Copy `.env.example` to `.env`
+   - Add your GitHub token to `.env`
+   - Add environment variables to Vercel project settings if deploying
 
-The server will start on port 3000 by default. You can modify the port by setting the `PORT` environment variable.
-
-## API Endpoints
-
-### Save Request
-- **URL**: `/api/save-request`
-- **Method**: `POST`
-- **Body**: Any JSON object
-- **Response**: Returns the saved request object with added timestamp and ID
+5. Start the server:
+   - Development: `npm run dev`
+   - Production: `npm start`
 
 ## Data Storage
 
-All requests are stored in `data/requests.json`. The data directory and file will be automatically created if they don't exist. 
+All requests are stored in `data/requests.json` in the GitHub repository. The application uses GitHub's API to read and write data directly to the repository.
+
+## API Endpoints
+
+- `GET /api/requests`: Get all feature requests
+- `POST /api/save-request`: Save a new feature request
+
+## Deployment
+
+This project is deployed on Vercel. The deployment is automatic when changes are pushed to the main branch.
+
+Required environment variables for Vercel:
+- `GITHUB_TOKEN`: Your GitHub Personal Access Token 
