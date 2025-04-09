@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontek Feature Request Portal</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="https://www.kontek.se/favicon.ico">
 </head>
 <body>
     <div id="adminSection" class="admin-section" style="display: none;">
@@ -27,108 +28,117 @@
 
     <header>
         <h1>Kontek Feature Request Portal</h1>
+        <p class="subtitle">Submit and track feature requests for Kontek projects</p>
     </header>
     
     <main>
-        <form id="requestForm">
-            <div class="form-group">
-                <label for="project">Project:</label>
-                <select id="project" required>
-                    <option value="" disabled selected>Select project</option>
-                    <option value="KID">Kontek in Development</option>
-                    <option value="KOAC">Kontek Academy</option>
-                    <option value="KCIM">Kontek Continuous Improvement</option>
-                    <option value="KOINT">Kontek Integrations</option>
-                    <option value="KOIN">Kontek Integrator</option>
-                    <option value="KIIT">Kontek Internal IT</option>
-                    <option value="KOOP">Kontek Operations</option>
-                    <option value="KONP">Kontek Pangea</option>
-                    <option value="KOSEC">Kontek Security</option>
-                    <option value="KOTO">Kontek Tools</option>
-                    <option value="KOUM">Kontek Umbrella</option>
-                    <option value="KOWH">Kontek Whistle</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" id="title" required placeholder="Brief summary of your request">
-            </div>
-            
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <textarea id="description" required placeholder="Detailed description of what you need"></textarea>
-                <small class="help-text">Describe the feature or change you're requesting in detail.</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="acceptanceCriteria">Acceptance Criteria:</label>
-                <textarea id="acceptanceCriteria" required placeholder="List the criteria that must be met"></textarea>
-                <small class="help-text">What specific conditions must be satisfied for this request to be considered complete?</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="businessValue">Business Value Description:</label>
-                <textarea id="businessValue" required placeholder="Explain the value this brings to the business"></textarea>
-                <small class="help-text">How will this benefit the organization or users?</small>
-            </div>
-
-            <div class="form-group">
-                <label>Business Value Categories (PRAISED):</label>
-                <div class="checkbox-group">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="productivity" name="businessValueTypes" value="productivity">
-                        <label for="productivity">Productivity gains (produktivitetsökning)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="reduced" name="businessValueTypes" value="reduced">
-                        <label for="reduced">Reduced costs (minskade kostnader)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="avoided" name="businessValueTypes" value="avoided">
-                        <label for="avoided">Avoided costs (undvikna kostnader)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="increased" name="businessValueTypes" value="increased">
-                        <label for="increased">Increased revenue (ökade intäkter)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="service" name="businessValueTypes" value="service">
-                        <label for="service">Service level improvements (förbättrad servicenivå)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="enhanced" name="businessValueTypes" value="enhanced">
-                        <label for="enhanced">Enhanced quality (förbättrad kvalitet)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="differentiation" name="businessValueTypes" value="differentiation">
-                        <label for="differentiation">Differentiation in the marketplace (differentiering på marknaden)</label>
-                    </div>
+        <form id="requestForm" class="feature-request-form">
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="project">Project:</label>
+                    <select id="project" required>
+                        <option value="" disabled selected>Select project</option>
+                        <option value="KID">Kontek in Development</option>
+                        <option value="KOAC">Kontek Academy</option>
+                        <option value="KCIM">Kontek Continuous Improvement</option>
+                        <option value="KOINT">Kontek Integrations</option>
+                        <option value="KOIN">Kontek Integrator</option>
+                        <option value="KIIT">Kontek Internal IT</option>
+                        <option value="KOOP">Kontek Operations</option>
+                        <option value="KONP">Kontek Pangea</option>
+                        <option value="KOSEC">Kontek Security</option>
+                        <option value="KOTO">Kontek Tools</option>
+                        <option value="KOUM">Kontek Umbrella</option>
+                        <option value="KOWH">Kontek Whistle</option>
+                    </select>
                 </div>
-                <small class="help-text">Select all applicable business value categories for this request.</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="priority">Priority:</label>
-                <select id="priority" required>
-                    <option value="" disabled selected>Select priority</option>
-                    <option value="highest">Highest - Critical Impact</option>
-                    <option value="high">High - Significant Impact</option>
-                    <option value="medium">Medium - Moderate Impact</option>
-                    <option value="low">Low - Minor Impact</option>
-                    <option value="lowest">Lowest - Minimal Impact</option>
-                </select>
-                <small class="help-text">Select based on business impact and urgency</small>
-            </div>
 
-            <div class="form-group">
-                <label for="requesterName">Your Name:</label>
-                <input type="text" id="requesterName" required>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" required placeholder="Brief summary of your request">
+                </div>
             </div>
             
-            <div class="form-group">
-                <label for="requesterEmail">Your Email:</label>
-                <input type="email" id="requesterEmail" required>
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" required placeholder="Detailed description of what you need"></textarea>
+                    <small class="help-text">Describe the feature or change you're requesting in detail.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="acceptanceCriteria">Acceptance Criteria:</label>
+                    <textarea id="acceptanceCriteria" required placeholder="List the criteria that must be met"></textarea>
+                    <small class="help-text">What specific conditions must be satisfied for this request to be considered complete?</small>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="businessValue">Business Value Description:</label>
+                    <textarea id="businessValue" required placeholder="Explain the value this brings to the business"></textarea>
+                    <small class="help-text">How will this benefit the organization or users?</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Business Value Categories (PRAISED):</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="productivity" name="businessValueTypes" value="productivity">
+                            <label for="productivity">Productivity gains (produktivitetsökning)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="reduced" name="businessValueTypes" value="reduced">
+                            <label for="reduced">Reduced costs (minskade kostnader)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="avoided" name="businessValueTypes" value="avoided">
+                            <label for="avoided">Avoided costs (undvikna kostnader)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="increased" name="businessValueTypes" value="increased">
+                            <label for="increased">Increased revenue (ökade intäkter)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service" name="businessValueTypes" value="service">
+                            <label for="service">Service level improvements (förbättrad servicenivå)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="enhanced" name="businessValueTypes" value="enhanced">
+                            <label for="enhanced">Enhanced quality (förbättrad kvalitet)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="differentiation" name="businessValueTypes" value="differentiation">
+                            <label for="differentiation">Differentiation in the marketplace (differentiering på marknaden)</label>
+                        </div>
+                    </div>
+                    <small class="help-text">Select all applicable business value categories for this request.</small>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="priority">Priority:</label>
+                    <select id="priority" required>
+                        <option value="" disabled selected>Select priority</option>
+                        <option value="highest">Highest - Critical Impact</option>
+                        <option value="high">High - Significant Impact</option>
+                        <option value="medium">Medium - Moderate Impact</option>
+                        <option value="low">Low - Minor Impact</option>
+                        <option value="lowest">Lowest - Minimal Impact</option>
+                    </select>
+                    <small class="help-text">Select based on business impact and urgency</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="requesterName">Your Name:</label>
+                    <input type="text" id="requesterName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="requesterEmail">Your Email:</label>
+                    <input type="email" id="requesterEmail" required>
+                </div>
             </div>
 
             <div class="form-actions">
