@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 requesterName: document.getElementById('requesterName').value,
                 requesterEmail: document.getElementById('requesterEmail').value,
                 submissionDate: new Date().toISOString().split('T')[0],
-                businessValueScores: getBusinessValueScores()
+                businessValueScores: getBusinessValueScores(),
+                businessValue: calculateBusinessValueSummary(getBusinessValueScores()) // Add calculated summary
             };
 
             console.log('Submitting form data:', formData);
@@ -115,61 +116,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function getBusinessValueScores() {
-        const scores = {};
-        categories.forEach(category => {
-            const checkbox = document.getElementById(`praised_${category.id}`);
-            const select = document.getElementById(`${category.id}_rating`);
-            if (checkbox && checkbox.checked && select) {
-                scores[category.id] = parseInt(select.value);
-            } else {
-                scores[category.id] = 0;
-            }
-        });
-        return scores;
-    }
-
-    function calculateBusinessValueSummary(scores) {
-        const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
-        const activeCategories = Object.entries(scores)
-            .filter(([_, score]) => score > 0)
-            .map(([category, score]) => {
-                const categoryInfo = categories.find(c => c.id === category);
-                return `${categoryInfo ? categoryInfo.name : category}: ${score}`;
-            });
-
-        if (activeCategories.length === 0) {
-            return 'No business value categories selected';
-        }
-
-        return `Total Score: ${totalScore}\n${activeCategories.join('\n')}`;
-    }
-
-    function resetPraisedSelections() {
-        categories.forEach(category => {
-            const checkbox = document.getElementById(`praised_${category.id}`);
-            const select = document.getElementById(`${category.id}_rating`);
-            if (checkbox) checkbox.checked = false;
-            if (select) select.value = '0';
-        });
-    }
-
     function formatBusinessValue(request) {
         console.log('Formatting business value for request:', request); // Debug log
         
         // Om det är ett äldre önskemål utan businessValueScores, visa default värde
         if (!request.businessValueScores) {
-            console.log('No businessValueScores, using default empty scores'); // Debug log
-            // Skapa ett tomt objekt med alla kategorier satta till 0
-            const emptyScores = {};
-            categories.forEach(category => {
-                emptyScores[category.id] = 0;
-            });
-            request.businessValueScores = emptyScores;
+            console.log('No businessValueScores, using businessValue or default'); // Debug log
+            return request.businessValue || '-';
         }
 
+        // Calculate total score from all categories
         const total = Object.values(request.businessValueScores).reduce((sum, score) => sum + score, 0);
         console.log('Total score:', total); // Debug log
+        
+        if (total === 0) {
+            return request.businessValue || '-';
+        }
         
         // Filtrera och sortera kategorier efter poäng (högst först)
         const scoresList = Object.entries(request.businessValueScores)
@@ -183,10 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .join('<br>');
 
         console.log('Scores list:', scoresList); // Debug log
-
-        if (total === 0) {
-            return request.businessValue || '-';
-        }
 
         return `
             <strong>Total: ${total}</strong>
