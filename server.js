@@ -34,28 +34,57 @@ app.get('/api/requests', async (req, res) => {
     res.json(JSON.parse(data));
   } catch (error) {
     console.error('Error reading requests:', error);
-    res.status(500).json({ error: 'Failed to read requests' });
+    res.status(500).json({ 
+      error: 'Failed to read requests',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 });
 
 // Save request endpoint
 app.post('/api/save-request', async (req, res) => {
   try {
-    const requestData = req.body;
-    const data = JSON.parse(await fs.readFile(requestsFile, 'utf8'));
-    
+    const requestData = {
+      ...req.body,
+      id: Date.now().toString(),
+      timestamp: new Date().toISOString()
+    };
+
+    // Read existing data
+    let data;
+    try {
+      const fileContent = await fs.readFile(requestsFile, 'utf8');
+      data = JSON.parse(fileContent);
+    } catch (error) {
+      data = { requests: [] };
+    }
+
+    // Validate data structure
     if (!Array.isArray(data.requests)) {
       data.requests = [];
     }
-    
+
+    // Add new request and save
     data.requests.push(requestData);
     await fs.writeFile(requestsFile, JSON.stringify(data, null, 2));
 
-    res.json(requestData);
+    res.status(201).json(requestData);
   } catch (error) {
     console.error('Error saving request:', error);
-    res.status(500).json({ error: 'Failed to save request' });
+    res.status(500).json({ 
+      error: 'Failed to save request',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ 
+    error: 'Something broke!',
+    details: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
 });
 
 // Start server
