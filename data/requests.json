@@ -140,6 +140,28 @@
       "id": "1744206105235",
       "timestamp": "2025-04-09T13:41:45.235Z",
       "status": "New"
+    },
+    {
+      "title": "Jag behöver hjälp att göra mitt arbete",
+      "description": "Jag är snäll.",
+      "project": "Interna verktyg",
+      "acceptanceCriteria": "Jag vill ha en robot som kan säga god jul och har en stor hatt.",
+      "requesterName": "Noak",
+      "requesterEmail": "noak.rosengren@kontek.se",
+      "submissionDate": "2025-04-09",
+      "businessValueScores": {
+        "productivity": 4,
+        "reduced": 3,
+        "avoided": 2,
+        "increased": 2,
+        "service": 2,
+        "enhanced": 2
+      },
+      "businessValue": "Total Score: 15\nProductivity gains: 4\nReduced costs: 3\nCompliancy: 2\nIncreased revenue: 2\nService level improvements: 2\nEnhanced quality: 2",
+      "businessValueTotal": 15,
+      "id": "1744207513339",
+      "timestamp": "2025-04-09T14:05:13.339Z",
+      "status": "New"
     }
   ]
 }
