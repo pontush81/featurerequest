@@ -1,71 +1,71 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Önskemål</title>
+    <title>Feature Requests</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" type="image/png" href="https://www.kontek.se/favicon.ico">
 </head>
 <body>
     <header>
-        <h1>Önskemål</h1>
-        <p class="subtitle">Skicka in dina önskemål</p>
+        <h1>Feature Requests</h1>
+        <p class="subtitle">Submit your feature requests</p>
     </header>
     
     <main>
         <form id="requestForm" class="feature-form">
             <div class="form-group">
-                <label for="project">Projekt *</label>
+                <label for="project">Project *</label>
                 <select id="project" name="project" required>
-                    <option value="">Välj projekt...</option>
-                    <option value="Kontek Lön">Kontek Lön</option>
+                    <option value="">Select project...</option>
+                    <option value="Kontek Lön">Kontek Payroll</option>
                     <option value="Kontek HRM">Kontek HRM</option>
-                    <option value="Interna verktyg">Interna verktyg</option>
-                    <option value="Jag vet inte">Jag vet inte</option>
+                    <option value="Interna verktyg">Internal Tools</option>
+                    <option value="Jag vet inte">I don't know</option>
                 </select>
             </div>
             
             <div class="form-group">
-                <label for="title">Titel *</label>
+                <label for="title">Title *</label>
                 <input type="text" id="title" name="title" required>
             </div>
 
             <div class="form-group">
-                <label for="description">Beskrivning *</label>
+                <label for="description">Description *</label>
                 <textarea id="description" name="description" required></textarea>
                 <small class="form-text">
-                    Exempel på format:<br>
-                    Som användare vill jag kunna filtrera mina arbetsuppgifter baserat på vem som tilldelat dem,
-                    så att jag enkelt kan se vilka uppgifter som kommer från min chef vs. mina kollegor.
+                    Example format:<br>
+                    As a user, I want to be able to filter my tasks based on who assigned them,
+                    so that I can easily see which tasks come from my manager vs. my colleagues.
                 </small>
             </div>
 
             <div class="form-group">
-                <label for="acceptanceCriteria">Acceptanskriterier *</label>
+                <label for="acceptanceCriteria">Acceptance Criteria *</label>
                 <textarea id="acceptanceCriteria" name="acceptanceCriteria" required></textarea>
                 <small class="form-text">
-                    Exempel på format:<br>
-                    1. Ett filter för tilldelad person visas i vyerna för arbetsuppgifter<br>
-                    2. Filtret visar alla personer som har tilldelat uppgifter<br>
-                    3. När man väljer en person uppdateras listan omedelbart<br>
-                    4. Det finns ett "Rensa filter" alternativ
+                    Example format:<br>
+                    1. A filter for assigned person is displayed in the task views<br>
+                    2. The filter shows all people who have assigned tasks<br>
+                    3. When selecting a person, the list updates immediately<br>
+                    4. There is a "Clear filter" option
                 </small>
             </div>
 
             <div class="form-group">
-                <label for="requesterName">Ditt namn *</label>
+                <label for="requesterName">Your Name *</label>
                 <input type="text" id="requesterName" name="requesterName" required>
             </div>
 
             <div class="form-group">
-                <label for="requesterEmail">Din e-post *</label>
+                <label for="requesterEmail">Your Email *</label>
                 <input type="email" id="requesterEmail" name="requesterEmail" required>
             </div>
 
             <div class="form-group">
-                <h3>Business Value Categories (PRAISED)</h3>
-                <p class="subtext">Bedöm varje kategori från 0 (ingen påverkan) till 4 (högsta påverkan)</p>
+                <h3>Business Value Categories</h3>
+                <p class="subtext">Rate each category from 0 (no impact) to 4 (highest impact)</p>
                 
                 <div class="praised-grid">
                     <div class="praised-item">
@@ -74,11 +74,11 @@
                             Productivity gains
                         </label>
                         <select name="productivity_rating" id="productivity_rating">
-                            <option value="0">0 - Ingen påverkan</option>
-                            <option value="1">1 - Låg påverkan</option>
-                            <option value="2">2 - Medel påverkan</option>
-                            <option value="3">3 - Hög påverkan</option>
-                            <option value="4">4 - Högsta påverkan</option>
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Low impact</option>
+                            <option value="2">2 - Medium impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
                         </select>
                     </div>
 
@@ -88,25 +88,25 @@
                             Reduced costs
                         </label>
                         <select name="reduced_rating" id="reduced_rating">
-                            <option value="0">0 - Ingen påverkan</option>
-                            <option value="1">1 - Låg påverkan</option>
-                            <option value="2">2 - Medel påverkan</option>
-                            <option value="3">3 - Hög påverkan</option>
-                            <option value="4">4 - Högsta påverkan</option>
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Low impact</option>
+                            <option value="2">2 - Medium impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
                         </select>
                     </div>
 
                     <div class="praised-item">
                         <label>
                             <input type="checkbox" name="praised_avoided" id="praised_avoided">
-                            Avoided costs
+                            Compliancy
                         </label>
                         <select name="avoided_rating" id="avoided_rating">
-                            <option value="0">0 - Ingen påverkan</option>
-                            <option value="1">1 - Låg påverkan</option>
-                            <option value="2">2 - Medel påverkan</option>
-                            <option value="3">3 - Hög påverkan</option>
-                            <option value="4">4 - Högsta påverkan</option>
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Low impact</option>
+                            <option value="2">2 - Medium impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
                         </select>
                     </div>
 
@@ -116,11 +116,11 @@
                             Increased revenue
                         </label>
                         <select name="increased_rating" id="increased_rating">
-                            <option value="0">0 - Ingen påverkan</option>
-                            <option value="1">1 - Låg påverkan</option>
-                            <option value="2">2 - Medel påverkan</option>
-                            <option value="3">3 - Hög påverkan</option>
-                            <option value="4">4 - Högsta påverkan</option>
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Low impact</option>
+                            <option value="2">2 - Medium impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
                         </select>
                     </div>
 
@@ -130,11 +130,11 @@
                             Service level improvements
                         </label>
                         <select name="service_rating" id="service_rating">
-                            <option value="0">0 - Ingen påverkan</option>
-                            <option value="1">1 - Låg påverkan</option>
-                            <option value="2">2 - Medel påverkan</option>
-                            <option value="3">3 - Hög påverkan</option>
-                            <option value="4">4 - Högsta påverkan</option>
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Low impact</option>
+                            <option value="2">2 - Medium impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
                         </select>
                     </div>
 
@@ -144,44 +144,30 @@
                             Enhanced quality
                         </label>
                         <select name="enhanced_rating" id="enhanced_rating">
-                            <option value="0">0 - Ingen påverkan</option>
-                            <option value="1">1 - Låg påverkan</option>
-                            <option value="2">2 - Medel påverkan</option>
-                            <option value="3">3 - Hög påverkan</option>
-                            <option value="4">4 - Högsta påverkan</option>
-                        </select>
-                    </div>
-
-                    <div class="praised-item">
-                        <label>
-                            <input type="checkbox" name="praised_differentiation" id="praised_differentiation">
-                            Differentiation in the marketplace
-                        </label>
-                        <select name="differentiation_rating" id="differentiation_rating">
-                            <option value="0">0 - Ingen påverkan</option>
-                            <option value="1">1 - Låg påverkan</option>
-                            <option value="2">2 - Medel påverkan</option>
-                            <option value="3">3 - Hög påverkan</option>
-                            <option value="4">4 - Högsta påverkan</option>
+                            <option value="0">0 - No impact</option>
+                            <option value="1">1 - Low impact</option>
+                            <option value="2">2 - Medium impact</option>
+                            <option value="3">3 - High impact</option>
+                            <option value="4">4 - Highest impact</option>
                         </select>
                     </div>
                 </div>
-                <p class="subtext">Välj och bedöm tillämpliga kategorier för detta önskemål.</p>
+                <p class="subtext">Select and rate applicable business value categories for this request.</p>
             </div>
 
             <input type="hidden" id="submissionDate" name="submissionDate">
             
-            <button type="submit" class="submit-button">Skicka in önskemål</button>
+            <button type="submit" class="submit-button">Submit Request</button>
         </form>
 
         <div id="statusMessage" class="status-message"></div>
         
         <div id="requestsTableContainer" class="section">
-            <h2>Inskickade önskemål</h2>
-            <p class="table-info">Sorteras automatiskt efter högst affärsvärde</p>
+            <h2>Submitted Requests</h2>
+            <p class="table-info">Automatically sorted by highest business value</p>
             
             <div class="admin-actions">
-                <button id="resetDataButton" class="danger-button">Rensa alla önskemål</button>
+                <button id="resetDataButton" class="danger-button">Clear All Requests</button>
             </div>
             
             <table id="requestsTable">

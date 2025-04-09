@@ -1,15 +1,14 @@
-// PRAISED categories configuration
+// Business value categories configuration
 const categories = [
     { id: 'productivity', name: 'Productivity gains' },
     { id: 'reduced', name: 'Reduced costs' },
-    { id: 'avoided', name: 'Avoided costs' },
+    { id: 'avoided', name: 'Compliancy' },
     { id: 'increased', name: 'Increased revenue' },
     { id: 'service', name: 'Service level improvements' },
-    { id: 'enhanced', name: 'Enhanced quality' },
-    { id: 'differentiation', name: 'Differentiation in the marketplace' }
+    { id: 'enhanced', name: 'Enhanced quality' }
 ];
 
-// Initialize PRAISED selection handlers
+// Initialize business value selection handlers
 function initializePraisedSelections() {
     categories.forEach(category => {
         const checkbox = document.getElementById(`praised_${category.id}`);
@@ -30,7 +29,7 @@ function initializePraisedSelections() {
     });
 }
 
-// Reset all PRAISED selections
+// Reset all business value selections
 function resetPraisedSelections() {
     categories.forEach(category => {
         const checkbox = document.getElementById(`praised_${category.id}`);
