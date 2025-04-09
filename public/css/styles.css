@@ -161,7 +161,7 @@ textarea {
     gap: 1rem;
     margin-top: 0.75rem;
     padding: 0.5rem;
-    background-color: #f8fafc;
+    background-color: var(--background-color);
     border-radius: var(--radius);
 }
 
@@ -268,4 +268,58 @@ footer {
     h1 {
         font-size: 1.75rem;
     }
+}
+
+/* Value item styling */
+.value-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: var(--card-background);
+    border-radius: calc(var(--radius) - 2px);
+    border: 1px solid var(--border-color);
+}
+
+.value-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.value-header input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-color: var(--border-color);
+    border-radius: 4px;
+}
+
+.value-header label {
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.value-rating {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.value-rating:disabled {
+    background-color: #f1f5f9;
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.value-rating:not(:disabled) {
+    cursor: pointer;
+}
+
+.value-rating:not(:disabled):hover {
+    border-color: var(--primary-color);
 } 

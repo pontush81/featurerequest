@@ -96,37 +96,101 @@ Currently, we can only see all tasks in a list, making it difficult to track ind
 
                 <div class="form-group">
                     <label>Business Value Categories (PRAISED):</label>
+                    <small class="help-text">Rate each category from 0 (no impact) to 4 (highest impact)</small>
                     <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="productivity" name="businessValueTypes" value="productivity">
-                            <label for="productivity">Productivity gains (produktivitetsökning)</label>
+                        <div class="value-item">
+                            <div class="value-header">
+                                <input type="checkbox" id="productivity" name="businessValueTypes" value="productivity">
+                                <label for="productivity">Productivity gains (produktivitetsökning)</label>
+                            </div>
+                            <select class="value-rating" id="productivity-rating" name="businessValueRating" disabled>
+                                <option value="0">0 - No impact</option>
+                                <option value="1">1 - Minor impact</option>
+                                <option value="2">2 - Moderate impact</option>
+                                <option value="3">3 - Significant impact</option>
+                                <option value="4">4 - Major impact</option>
+                            </select>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="reduced" name="businessValueTypes" value="reduced">
-                            <label for="reduced">Reduced costs (minskade kostnader)</label>
+                        <div class="value-item">
+                            <div class="value-header">
+                                <input type="checkbox" id="reduced" name="businessValueTypes" value="reduced">
+                                <label for="reduced">Reduced costs (minskade kostnader)</label>
+                            </div>
+                            <select class="value-rating" id="reduced-rating" name="businessValueRating" disabled>
+                                <option value="0">0 - No impact</option>
+                                <option value="1">1 - Minor impact</option>
+                                <option value="2">2 - Moderate impact</option>
+                                <option value="3">3 - Significant impact</option>
+                                <option value="4">4 - Major impact</option>
+                            </select>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="avoided" name="businessValueTypes" value="avoided">
-                            <label for="avoided">Avoided costs (undvikna kostnader)</label>
+                        <div class="value-item">
+                            <div class="value-header">
+                                <input type="checkbox" id="avoided" name="businessValueTypes" value="avoided">
+                                <label for="avoided">Avoided costs (undvikna kostnader)</label>
+                            </div>
+                            <select class="value-rating" id="avoided-rating" name="businessValueRating" disabled>
+                                <option value="0">0 - No impact</option>
+                                <option value="1">1 - Minor impact</option>
+                                <option value="2">2 - Moderate impact</option>
+                                <option value="3">3 - Significant impact</option>
+                                <option value="4">4 - Major impact</option>
+                            </select>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="increased" name="businessValueTypes" value="increased">
-                            <label for="increased">Increased revenue (ökade intäkter)</label>
+                        <div class="value-item">
+                            <div class="value-header">
+                                <input type="checkbox" id="increased" name="businessValueTypes" value="increased">
+                                <label for="increased">Increased revenue (ökade intäkter)</label>
+                            </div>
+                            <select class="value-rating" id="increased-rating" name="businessValueRating" disabled>
+                                <option value="0">0 - No impact</option>
+                                <option value="1">1 - Minor impact</option>
+                                <option value="2">2 - Moderate impact</option>
+                                <option value="3">3 - Significant impact</option>
+                                <option value="4">4 - Major impact</option>
+                            </select>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="service" name="businessValueTypes" value="service">
-                            <label for="service">Service level improvements (förbättrad servicenivå)</label>
+                        <div class="value-item">
+                            <div class="value-header">
+                                <input type="checkbox" id="service" name="businessValueTypes" value="service">
+                                <label for="service">Service level improvements (förbättrad servicenivå)</label>
+                            </div>
+                            <select class="value-rating" id="service-rating" name="businessValueRating" disabled>
+                                <option value="0">0 - No impact</option>
+                                <option value="1">1 - Minor impact</option>
+                                <option value="2">2 - Moderate impact</option>
+                                <option value="3">3 - Significant impact</option>
+                                <option value="4">4 - Major impact</option>
+                            </select>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="enhanced" name="businessValueTypes" value="enhanced">
-                            <label for="enhanced">Enhanced quality (förbättrad kvalitet)</label>
+                        <div class="value-item">
+                            <div class="value-header">
+                                <input type="checkbox" id="enhanced" name="businessValueTypes" value="enhanced">
+                                <label for="enhanced">Enhanced quality (förbättrad kvalitet)</label>
+                            </div>
+                            <select class="value-rating" id="enhanced-rating" name="businessValueRating" disabled>
+                                <option value="0">0 - No impact</option>
+                                <option value="1">1 - Minor impact</option>
+                                <option value="2">2 - Moderate impact</option>
+                                <option value="3">3 - Significant impact</option>
+                                <option value="4">4 - Major impact</option>
+                            </select>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="differentiation" name="businessValueTypes" value="differentiation">
-                            <label for="differentiation">Differentiation in the marketplace (differentiering på marknaden)</label>
+                        <div class="value-item">
+                            <div class="value-header">
+                                <input type="checkbox" id="differentiation" name="businessValueTypes" value="differentiation">
+                                <label for="differentiation">Differentiation in the marketplace (differentiering på marknaden)</label>
+                            </div>
+                            <select class="value-rating" id="differentiation-rating" name="businessValueRating" disabled>
+                                <option value="0">0 - No impact</option>
+                                <option value="1">1 - Minor impact</option>
+                                <option value="2">2 - Moderate impact</option>
+                                <option value="3">3 - Significant impact</option>
+                                <option value="4">4 - Major impact</option>
+                            </select>
                         </div>
                     </div>
-                    <small class="help-text">Select all applicable business value categories for this request.</small>
+                    <small class="help-text">Select and rate applicable business value categories for this request.</small>
                 </div>
             </div>
             
