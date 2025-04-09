@@ -94,6 +94,29 @@
       "id": "1744204773470",
       "timestamp": "2025-04-09T13:19:33.470Z",
       "status": "New"
+    },
+    {
+      "title": "Hej",
+      "description": "sdfkjsdf",
+      "project": "Interna verktyg",
+      "acceptanceCriteria": "smdsjdfh",
+      "requesterName": "Pontus",
+      "requesterEmail": "pontus.hberg@gmail.com",
+      "submissionDate": "2025-04-09",
+      "businessValueScores": {
+        "productivity": 4,
+        "reduced": 4,
+        "avoided": 4,
+        "increased": 4,
+        "service": 4,
+        "enhanced": 4,
+        "differentiation": 4
+      },
+      "businessValue": "Total Score: 28\nProductivity gains: 4\nReduced costs: 4\nAvoided costs: 4\nIncreased revenue: 4\nService level improvements: 4\nEnhanced quality: 4\nDifferentiation in the marketplace: 4",
+      "businessValueTotal": 28,
+      "id": "1744205193475",
+      "timestamp": "2025-04-09T13:26:33.475Z",
+      "status": "New"
     }
   ]
 }
