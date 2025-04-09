@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
                 project: document.getElementById('project').value,
-                priority: document.getElementById('priority').value,
                 acceptanceCriteria: document.getElementById('acceptanceCriteria').value,
                 requesterName: document.getElementById('requesterName').value,
                 requesterEmail: document.getElementById('requesterEmail').value,
@@ -152,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td>${request.project || request.area || '-'}</td>
                         <td>${request.title || '-'}</td>
                         <td>${request.status || 'New'}</td>
-                        <td>${request.priority || '-'}</td>
                         <td class="business-value-cell">${businessValue}</td>
                     </tr>
                 `;
