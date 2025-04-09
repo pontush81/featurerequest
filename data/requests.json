@@ -117,6 +117,29 @@
       "id": "1744205193475",
       "timestamp": "2025-04-09T13:26:33.475Z",
       "status": "New"
+    },
+    {
+      "title": "Jag vill ha",
+      "description": "som en admin vill jag kunna ...så att...",
+      "project": "Kontek Lön",
+      "acceptanceCriteria": "sdkfkjsdfhlksdhf",
+      "requesterName": "Pontus",
+      "requesterEmail": "pontus.hberg@gmail.com",
+      "submissionDate": "2025-04-09",
+      "businessValueScores": {
+        "productivity": 0,
+        "reduced": 4,
+        "avoided": 0,
+        "increased": 4,
+        "service": 0,
+        "enhanced": 4,
+        "differentiation": 4
+      },
+      "businessValue": "Total Score: 16\nReduced costs: 4\nIncreased revenue: 4\nEnhanced quality: 4\nDifferentiation in the marketplace: 4",
+      "businessValueTotal": 16,
+      "id": "1744206105235",
+      "timestamp": "2025-04-09T13:41:45.235Z",
+      "status": "New"
     }
   ]
 }
