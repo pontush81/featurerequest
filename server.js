@@ -93,6 +93,29 @@ app.get('/api/requests', async (req, res) => {
     }
 });
 
+// Add this new endpoint to reset all requests
+app.post('/api/reset-data', async (req, res) => {
+    try {
+        console.log('POST /api/reset-data called - resetting all data');
+        const { sha } = await getFileContent();
+        
+        // Create empty data structure
+        const emptyData = { requests: [] };
+        
+        console.log('Updating file with empty content');
+        await updateFileContent(emptyData, sha);
+
+        console.log('Data reset successfully');
+        res.status(200).json({ success: true, message: 'All data has been reset' });
+    } catch (error) {
+        console.error('Error in /api/reset-data:', error);
+        res.status(500).json({ 
+            error: 'Failed to reset data',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
+    }
+});
+
 app.post('/api/save-request', async (req, res) => {
     try {
         console.log('POST /api/save-request called with data:', req.body);

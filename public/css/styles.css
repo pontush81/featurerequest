@@ -491,4 +491,29 @@ h3 {
     color: #4f46e5;
     display: inline-block;
     margin-bottom: 0.25rem;
+}
+
+/* Add these styles to the end of the file */
+
+.admin-actions {
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.danger-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.danger-button:hover {
+    background-color: #c82333;
+}
+
+.danger-button:active {
+    background-color: #bd2130;
 } 

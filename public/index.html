@@ -187,9 +187,14 @@ Currently, we can only see all tasks in a list, making it difficult to track ind
 
         <div id="statusMessage" class="status-message"></div>
         
-        <div id="requestsList">
+        <div id="requestsTableContainer" class="section">
             <h2>Inskickade önskemål</h2>
-            <table class="requests-table">
+            
+            <div class="admin-actions">
+                <button id="resetDataButton" class="danger-button">Rensa alla önskemål</button>
+            </div>
+            
+            <table id="requestsTable">
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -201,7 +206,7 @@ Currently, we can only see all tasks in a list, making it difficult to track ind
                     </tr>
                 </thead>
                 <tbody id="requestsTableBody">
-                    <!-- Filled by JavaScript -->
+                    <!-- Requests will be loaded here -->
                 </tbody>
             </table>
         </div>

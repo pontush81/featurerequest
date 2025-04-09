@@ -66,6 +66,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Handle reset data button click
+    const resetDataButton = document.getElementById('resetDataButton');
+    if (resetDataButton) {
+        resetDataButton.addEventListener('click', async () => {
+            if (!confirm('Är du säker på att du vill radera ALLA önskemål? Detta kan inte ångras.')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/reset-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to reset data');
+                }
+                
+                const result = await response.json();
+                console.log('Data reset result:', result);
+                
+                // Reload requests list
+                loadRequests();
+                
+                // Show success message
+                showMessage('Alla önskemål har rensats!', 'success');
+            } catch (error) {
+                console.error('Error resetting data:', error);
+                showMessage('Ett fel uppstod när data skulle rensas.', 'error');
+            }
+        });
+    }
+
     // Function to load and display requests
     async function loadRequests() {
         try {
@@ -187,4 +222,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         }, 5000);
     }
-}); 
+});
