@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = {
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
-                area: document.getElementById('area').value,
+                project: document.getElementById('project').value,
                 priority: document.getElementById('priority').value,
                 acceptanceCriteria: document.getElementById('acceptanceCriteria').value,
                 requesterName: document.getElementById('requesterName').value,
@@ -173,8 +173,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Filtrera och sortera kategorier efter poäng (högst först)
         const scoresList = Object.entries(request.businessValueScores)
-            .filter(([_, score]) => score > 0)
-            .sort(([_, scoreA], [_, scoreB]) => scoreB - scoreA)
+            .filter(([categoryId, score]) => score > 0)
+            .sort(([_, scoreA], [__, scoreB]) => scoreB - scoreA)
             .map(([category, score]) => {
                 const categoryInfo = categories.find(c => c.id === category);
                 const categoryName = categoryInfo ? categoryInfo.name : category;
