@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Scores list:', scoresList); // Debug log
 
         if (total === 0) {
-            return '-';
+            return request.businessValue || '-';
         }
 
         return `
