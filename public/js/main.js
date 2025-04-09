@@ -21,11 +21,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
                 acceptanceCriteria: document.getElementById('acceptanceCriteria').value,
+                businessValue: document.getElementById('businessValue').value,
+                businessValueTypes: Array.from(document.querySelectorAll('input[name="businessValueTypes"]:checked'))
+                    .map(cb => cb.value),
                 priority: document.getElementById('priority').value,
                 requesterName: document.getElementById('requesterName').value,
                 requesterEmail: document.getElementById('requesterEmail').value,
                 submissionDate: document.getElementById('submissionDate').value,
-                status: 'Ny'
+                status: 'New'
             };
 
             // Save request
@@ -41,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Network response was not ok');
             }
 
-            showStatusMessage('Önskemålet har sparats!', 'success');
+            showStatusMessage('Request submitted successfully!', 'success');
             requestForm.reset();
             
             // Reset date to today after form reset
@@ -50,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reload the requests list
             loadRequests();
         } catch (error) {
-            showStatusMessage('Ett fel uppstod. Försök igen.', 'error');
+            showStatusMessage('Error submitting request. Please try again.', 'error');
             console.error('Error:', error);
         }
     });
@@ -74,11 +77,11 @@ document.addEventListener('DOMContentLoaded', function() {
             table.innerHTML = `
                 <thead>
                     <tr>
-                        <th>Datum</th>
-                        <th>Område</th>
-                        <th>Titel</th>
+                        <th>Date</th>
+                        <th>Project</th>
+                        <th>Title</th>
                         <th>Status</th>
-                        <th>Prioritet</th>
+                        <th>Priority</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             requestsTableContainer.appendChild(table);
         } catch (error) {
             console.error('Error loading requests:', error);
-            requestsTableContainer.innerHTML = '<p>Ett fel uppstod när önskemålen skulle laddas.</p>';
+            requestsTableContainer.innerHTML = '<p>Error loading requests. Please try again later.</p>';
         }
     }
 
