@@ -96,6 +96,15 @@ app.get('/api/requests', async (req, res) => {
 app.post('/api/save-request', async (req, res) => {
     try {
         console.log('POST /api/save-request called with data:', req.body);
+        
+        // Validate required fields
+        if (!req.body.title || !req.body.description || !req.body.area) {
+            return res.status(400).json({ 
+                error: 'Missing required fields',
+                details: 'Title, description, and area are required'
+            });
+        }
+
         const { content, sha } = await getFileContent();
         
         const requestData = {

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadRequests();
 
     // Handle feature request form submission
-    requestForm.addEventListener('submit', async (e) => {
+    document.getElementById('requestForm').addEventListener('submit', async function(e) {
         e.preventDefault();
 
         try {
