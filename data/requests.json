@@ -23,6 +23,30 @@
       "id": "1744203651090",
       "timestamp": "2025-04-09T13:00:51.090Z",
       "status": "New"
+    },
+    {
+      "title": "test",
+      "description": "sdfsdfdf",
+      "project": "Interna verktyg",
+      "priority": "Låg",
+      "acceptanceCriteria": "dfg",
+      "requesterName": "Pontus",
+      "requesterEmail": "pontus.hberg@gmail.com",
+      "submissionDate": "2025-04-09",
+      "businessValueScores": {
+        "productivity": 2,
+        "reduced": 2,
+        "avoided": 0,
+        "increased": 0,
+        "service": 0,
+        "enhanced": 0,
+        "differentiation": 0
+      },
+      "businessValue": "Total Score: 4\nProductivity gains: 2\nReduced costs: 2",
+      "businessValueTotal": 4,
+      "id": "1744203689333",
+      "timestamp": "2025-04-09T13:01:29.333Z",
+      "status": "New"
     }
   ]
 }
