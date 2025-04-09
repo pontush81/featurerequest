@@ -23,19 +23,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Function to get file content from GitHub
 async function getFileContent() {
     try {
+        console.log('Fetching file content from GitHub...');
         const response = await octokit.repos.getContent({
             owner,
             repo,
             path: filePath,
         });
 
+        console.log('GitHub response received');
         const content = Buffer.from(response.data.content, 'base64').toString();
+        const parsedContent = JSON.parse(content);
+        console.log('Parsed content:', parsedContent);
+        
         return {
-            content: JSON.parse(content),
+            content: parsedContent,
             sha: response.data.sha
         };
     } catch (error) {
+        console.error('Error in getFileContent:', error);
         if (error.status === 404) {
+            console.log('File not found, returning empty requests array');
             return {
                 content: { requests: [] },
                 sha: null
@@ -65,10 +72,12 @@ async function updateFileContent(newContent, sha) {
 // API Routes
 app.get('/api/requests', async (req, res) => {
     try {
+        console.log('GET /api/requests called');
         const { content } = await getFileContent();
+        console.log('Sending response:', content.requests);
         res.json(content.requests);
     } catch (error) {
-        console.error('Error reading requests:', error);
+        console.error('Error in /api/requests:', error);
         res.status(500).json({ 
             error: 'Failed to read requests',
             details: process.env.NODE_ENV === 'development' ? error.message : undefined
