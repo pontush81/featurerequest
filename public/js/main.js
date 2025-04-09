@@ -86,9 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td>${request.title || '-'}</td>
                     <td>${request.status || 'New'}</td>
                     <td>${request.priority || '-'}</td>
-                    <td class="business-value-cell">
-                        ${formatBusinessValue(request)}
-                    </td>
+                    <td>${formatBusinessValue(request)}</td>
                 </tr>
             `).join('');
 
@@ -147,18 +145,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function formatBusinessValue(request) {
-        if (!request.businessValueScores || Object.keys(request.businessValueScores).length === 0) {
-            return request.businessValue || '-';
+        // Om det är ett äldre önskemål utan businessValueScores, visa default värde
+        if (!request.businessValueScores) {
+            // Skapa ett tomt objekt med alla kategorier satta till 0
+            const emptyScores = {};
+            categories.forEach(category => {
+                emptyScores[category.id] = 0;
+            });
+            request.businessValueScores = emptyScores;
         }
 
         const total = Object.values(request.businessValueScores).reduce((sum, score) => sum + score, 0);
+        
+        // Filtrera och sortera kategorier efter poäng (högst först)
         const scoresList = Object.entries(request.businessValueScores)
             .filter(([_, score]) => score > 0)
+            .sort(([_, scoreA], [_, scoreB]) => scoreB - scoreA)
             .map(([category, score]) => {
                 const categoryInfo = categories.find(c => c.id === category);
-                return `${categoryInfo ? categoryInfo.name : category}: ${score}`;
+                const categoryName = categoryInfo ? categoryInfo.name : category;
+                return `${categoryName}: ${score}`;
             })
             .join('<br>');
+
+        if (total === 0) {
+            return '<div class="business-value-cell">-</div>';
+        }
 
         return `
             <div class="business-value-cell">
