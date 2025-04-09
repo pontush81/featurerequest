@@ -1,30 +1,34 @@
-# Kontek Feature Request Portal
+# Wish Request Management
 
-A web-based portal for submitting and managing feature requests within Kontek.
+A simple server application for handling and storing requests.
 
-## Features
+## Setup
 
-- Submit feature requests with detailed information
-- Project selection
-- Priority levels
-- Business value categorization
-- Acceptance criteria
-- Admin configuration section
+1. Install dependencies:
+```bash
+npm install
+```
 
-## Deployment
+2. Start the server:
+- For production:
+```bash
+npm start
+```
+- For development (with auto-reload):
+```bash
+npm run dev
+```
 
-This project is deployed on Vercel. The deployment is automatic when changes are pushed to the main branch.
+The server will start on port 3000 by default. You can modify the port by setting the `PORT` environment variable.
 
-## Local Development
+## API Endpoints
 
-1. Clone the repository
-2. Open `wishes.html` in your browser
-3. Make changes as needed
+### Save Request
+- **URL**: `/api/save-request`
+- **Method**: `POST`
+- **Body**: Any JSON object
+- **Response**: Returns the saved request object with added timestamp and ID
 
-## Structure
+## Data Storage
 
-- `wishes.html` - Main application file
-- `css/` - Stylesheets
-- `js/` - JavaScript files
-  - `config.js` - Configuration settings
-  - `main.js` - Main application logic 
+All requests are stored in `data/requests.json`. The data directory and file will be automatically created if they don't exist. 

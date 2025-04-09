@@ -1,235 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontek Feature Request Portal</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/png" href="https://www.kontek.se/favicon.ico">
+    <title>Önskemål</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="adminSection" class="admin-section" style="display: none;">
-        <div class="admin-panel">
-            <h2>Admin Configuration</h2>
-            <form id="adminForm">
-                <div class="form-group">
-                    <label for="jiraToken">Jira API Token:</label>
-                    <input type="password" id="jiraToken" required>
-                    <small class="help-text">Enter your Jira API token (stored securely)</small>
-                </div>
-                <div class="form-group">
-                    <label for="jiraUser">Jira Username (Email):</label>
-                    <input type="email" id="jiraUser" required>
-                </div>
-                <button type="submit" class="btn-primary">Save Configuration</button>
-            </form>
-        </div>
-    </div>
-
     <header>
-        <h1>Kontek Feature Request Portal</h1>
-        <p class="subtitle">Submit and track feature requests for Kontek projects</p>
+        <h1>Önskemål</h1>
+        <p class="subtitle">Skicka in dina önskemål</p>
     </header>
-    
+
     <main>
-        <form id="requestForm" class="feature-request-form">
-            <div class="form-section">
-                <div class="form-group">
-                    <label for="project">Välj område (exempel):</label>
-                    <select id="project" required>
-                        <option value="" disabled selected>Välj område</option>
-                        <option value="KLN">Kontek Lön</option>
-                        <option value="KHRM">Kontek HRM</option>
-                        <option value="KINT">Interna verktyg</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" required placeholder="Brief summary of your request">
-                </div>
+        <form id="requestForm">
+            <div class="form-group">
+                <label for="project">Välj område</label>
+                <select id="project" name="project" required>
+                    <option value="">Välj ett område</option>
+                    <option value="Kontek">Kontek</option>
+                    <option value="Kontek Tid">Kontek Tid</option>
+                    <option value="Kontek Lön">Kontek Lön</option>
+                    <option value="Kontek Resa">Kontek Resa</option>
+                    <option value="Kontek Flex">Kontek Flex</option>
+                </select>
             </div>
-            
-            <div class="form-section">
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea id="description" required placeholder="As a [type of user], I want [some goal] so that [some reason].
 
-Example:
-As a project manager, I want to be able to filter tasks by assignee so that I can quickly see what each team member is working on.
-
-Background:
-Currently, we can only see all tasks in a list, making it difficult to track individual workloads."></textarea>
-                    <small class="help-text">Describe the feature or change you're requesting in detail using the user story format.</small>
-                </div>
-                
-                <div class="form-group">
-                    <label for="acceptanceCriteria">Acceptance Criteria:</label>
-                    <textarea id="acceptanceCriteria" required placeholder="List specific, testable conditions that must be met. Example:
-
-1. A dropdown filter for assignees is available in the task list view
-2. The filter shows all team members who have tasks assigned
-3. Selecting an assignee immediately updates the task list
-4. The filter persists when navigating away and back
-5. A 'Clear Filter' option is available
-6. The current filter is visible in the URL for sharing
-7. The system handles cases where an assignee is removed but had tasks"></textarea>
-                    <small class="help-text">What specific conditions must be satisfied? Be detailed and testable.</small>
-                </div>
+            <div class="form-group">
+                <label for="title">Titel</label>
+                <input type="text" id="title" name="title" required>
             </div>
-            
-            <div class="form-section">
-                <div class="form-group">
-                    <label for="businessValue">Business Value Description:</label>
-                    <textarea id="businessValue" required placeholder="Explain the value this brings to the business"></textarea>
-                    <small class="help-text">How will this benefit the organization or users?</small>
-                </div>
 
-                <div class="form-group">
-                    <label>Business Value Categories (PRAISED):</label>
-                    <small class="help-text">Rate each category from 0 (no impact) to 4 (highest impact)</small>
-                    <div class="checkbox-group">
-                        <div class="value-item">
-                            <div class="value-header">
-                                <input type="checkbox" id="productivity" name="businessValueTypes" value="productivity">
-                                <label for="productivity">Productivity gains</label>
-                            </div>
-                            <select class="value-rating" id="productivity-rating" name="businessValueRating" disabled>
-                                <option value="0">0 - No impact</option>
-                                <option value="1">1 - Minor impact</option>
-                                <option value="2">2 - Moderate impact</option>
-                                <option value="3">3 - Significant impact</option>
-                                <option value="4">4 - Major impact</option>
-                            </select>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-header">
-                                <input type="checkbox" id="reduced" name="businessValueTypes" value="reduced">
-                                <label for="reduced">Reduced costs</label>
-                            </div>
-                            <select class="value-rating" id="reduced-rating" name="businessValueRating" disabled>
-                                <option value="0">0 - No impact</option>
-                                <option value="1">1 - Minor impact</option>
-                                <option value="2">2 - Moderate impact</option>
-                                <option value="3">3 - Significant impact</option>
-                                <option value="4">4 - Major impact</option>
-                            </select>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-header">
-                                <input type="checkbox" id="avoided" name="businessValueTypes" value="avoided">
-                                <label for="avoided">Avoided costs</label>
-                            </div>
-                            <select class="value-rating" id="avoided-rating" name="businessValueRating" disabled>
-                                <option value="0">0 - No impact</option>
-                                <option value="1">1 - Minor impact</option>
-                                <option value="2">2 - Moderate impact</option>
-                                <option value="3">3 - Significant impact</option>
-                                <option value="4">4 - Major impact</option>
-                            </select>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-header">
-                                <input type="checkbox" id="increased" name="businessValueTypes" value="increased">
-                                <label for="increased">Increased revenue</label>
-                            </div>
-                            <select class="value-rating" id="increased-rating" name="businessValueRating" disabled>
-                                <option value="0">0 - No impact</option>
-                                <option value="1">1 - Minor impact</option>
-                                <option value="2">2 - Moderate impact</option>
-                                <option value="3">3 - Significant impact</option>
-                                <option value="4">4 - Major impact</option>
-                            </select>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-header">
-                                <input type="checkbox" id="service" name="businessValueTypes" value="service">
-                                <label for="service">Service level improvements</label>
-                            </div>
-                            <select class="value-rating" id="service-rating" name="businessValueRating" disabled>
-                                <option value="0">0 - No impact</option>
-                                <option value="1">1 - Minor impact</option>
-                                <option value="2">2 - Moderate impact</option>
-                                <option value="3">3 - Significant impact</option>
-                                <option value="4">4 - Major impact</option>
-                            </select>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-header">
-                                <input type="checkbox" id="enhanced" name="businessValueTypes" value="enhanced">
-                                <label for="enhanced">Enhanced quality</label>
-                            </div>
-                            <select class="value-rating" id="enhanced-rating" name="businessValueRating" disabled>
-                                <option value="0">0 - No impact</option>
-                                <option value="1">1 - Minor impact</option>
-                                <option value="2">2 - Moderate impact</option>
-                                <option value="3">3 - Significant impact</option>
-                                <option value="4">4 - Major impact</option>
-                            </select>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-header">
-                                <input type="checkbox" id="differentiation" name="businessValueTypes" value="differentiation">
-                                <label for="differentiation">Differentiation in the marketplace</label>
-                            </div>
-                            <select class="value-rating" id="differentiation-rating" name="businessValueRating" disabled>
-                                <option value="0">0 - No impact</option>
-                                <option value="1">1 - Minor impact</option>
-                                <option value="2">2 - Moderate impact</option>
-                                <option value="3">3 - Significant impact</option>
-                                <option value="4">4 - Major impact</option>
-                            </select>
-                        </div>
-                    </div>
-                    <small class="help-text">Select and rate applicable business value categories for this request.</small>
-                </div>
+            <div class="form-group">
+                <label for="description">Beskrivning</label>
+                <textarea id="description" name="description" required></textarea>
             </div>
-            
-            <div class="form-section">
-                <div class="form-group">
-                    <label for="priority">Priority:</label>
-                    <select id="priority" required>
-                        <option value="" disabled selected>Select priority</option>
-                        <option value="highest">Highest - Critical Impact</option>
-                        <option value="high">High - Significant Impact</option>
-                        <option value="medium">Medium - Moderate Impact</option>
-                        <option value="low">Low - Minor Impact</option>
-                        <option value="lowest">Lowest - Minimal Impact</option>
-                    </select>
-                    <small class="help-text">Select based on business impact and urgency</small>
-                </div>
 
-                <div class="form-group">
-                    <label for="requesterName">Your Name:</label>
-                    <input type="text" id="requesterName" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="requesterEmail">Your Email:</label>
-                    <input type="email" id="requesterEmail" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="submissionDate">Submission Date:</label>
-                    <input type="date" id="submissionDate" required>
-                    <small class="help-text">Date of submission (defaults to today)</small>
-                </div>
+            <div class="form-group">
+                <label for="acceptanceCriteria">Acceptanskriterier</label>
+                <textarea id="acceptanceCriteria" name="acceptanceCriteria" required></textarea>
             </div>
+
+            <div class="form-group">
+                <label for="priority">Prioritet</label>
+                <select id="priority" name="priority" required>
+                    <option value="">Välj prioritet</option>
+                    <option value="Låg">Låg</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hög">Hög</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="requesterName">Ditt namn</label>
+                <input type="text" id="requesterName" name="requesterName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="requesterEmail">Din e-post</label>
+                <input type="email" id="requesterEmail" name="requesterEmail" required>
+            </div>
+
+            <input type="hidden" id="submissionDate" name="submissionDate">
 
             <div class="form-actions">
-                <button type="submit" class="btn-primary">Submit Request</button>
-                <button type="reset" class="btn-secondary">Clear Form</button>
+                <button type="submit" class="btn-primary">Skicka önskemål</button>
             </div>
         </form>
+
+        <div id="statusMessage" class="status-message"></div>
+        
+        <div id="requestsList">
+            <h2>Inskickade önskemål</h2>
+            <div id="requestsTableContainer"></div>
+        </div>
     </main>
 
-    <div id="statusMessage" class="status-message"></div>
-
-    <footer>
-        <p>Kontek Feature Request Portal &copy; 2024</p>
-    </footer>
-
-    <script src="/js/config.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
