@@ -16,7 +16,9 @@ const FILE_PATH = 'data/requests.json';
 
 // Middleware
 app.use(express.json());
-app.use(express.static('public'));
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Get file content from GitHub
 async function getFileContent() {
@@ -95,6 +97,11 @@ app.post('/api/save-request', async (req, res) => {
             details: process.env.NODE_ENV === 'development' ? error.message : undefined
         });
     }
+});
+
+// Serve index.html for all other routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Error handling middleware
