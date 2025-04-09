@@ -12,26 +12,26 @@ document.addEventListener('DOMContentLoaded', function() {
     loadRequests();
 
     // Handle feature request form submission
-    requestForm.addEventListener('submit', async function(e) {
+    requestForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const businessValueScores = getBusinessValueScores();
-        const businessValueSummary = calculateBusinessValueSummary(businessValueScores);
-
-        const formData = {
-            title: document.getElementById('title').value,
-            description: document.getElementById('description').value,
-            area: document.getElementById('area').value,
-            priority: document.getElementById('priority').value,
-            acceptanceCriteria: document.getElementById('acceptanceCriteria').value,
-            businessValue: businessValueSummary,
-            businessValueScores: businessValueScores,
-            requesterName: document.getElementById('requesterName').value,
-            requesterEmail: document.getElementById('requesterEmail').value,
-            submissionDate: new Date().toISOString().split('T')[0]
-        };
 
         try {
+            // Get form data
+            const formData = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                area: document.getElementById('area').value,
+                priority: document.getElementById('priority').value,
+                acceptanceCriteria: document.getElementById('acceptanceCriteria').value,
+                requesterName: document.getElementById('requesterName').value,
+                requesterEmail: document.getElementById('requesterEmail').value,
+                submissionDate: new Date().toISOString().split('T')[0],
+                businessValueScores: getBusinessValueScores()
+            };
+
+            console.log('Submitting form data:', formData);
+
+            // Send data to server
             const response = await fetch('/api/save-request', {
                 method: 'POST',
                 headers: {
@@ -41,11 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to save request');
             }
 
+            const result = await response.json();
+            console.log('Request saved successfully:', result);
+
             // Clear form and reset PRAISED selections
-            requestForm.reset();
+            document.getElementById('requestForm').reset();
             resetPraisedSelections();
             
             // Reload requests list
@@ -54,8 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show success message
             showMessage('Request submitted successfully!', 'success');
         } catch (error) {
-            console.error('Error:', error);
-            showMessage('Error submitting request. Please try again.', 'error');
+            console.error('Error submitting request:', error);
+            showMessage(error.message || 'Error submitting request. Please try again.', 'error');
         }
     });
 

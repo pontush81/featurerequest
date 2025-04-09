@@ -54,19 +54,27 @@ async function getFileContent() {
 
 // Function to update file content on GitHub
 async function updateFileContent(newContent, sha) {
-    const message = 'Update requests data';
-    const content = Buffer.from(JSON.stringify(newContent, null, 2)).toString('base64');
+    try {
+        console.log('Updating file content on GitHub...');
+        const message = 'Update requests data';
+        const content = Buffer.from(JSON.stringify(newContent, null, 2)).toString('base64');
 
-    const params = {
-        owner,
-        repo,
-        path: filePath,
-        message,
-        content,
-        ...(sha && { sha })
-    };
+        const params = {
+            owner,
+            repo,
+            path: filePath,
+            message,
+            content,
+            ...(sha && { sha })
+        };
 
-    await octokit.repos.createOrUpdateFileContents(params);
+        const response = await octokit.repos.createOrUpdateFileContents(params);
+        console.log('File updated successfully:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error in updateFileContent:', error);
+        throw error;
+    }
 }
 
 // API Routes
@@ -87,6 +95,7 @@ app.get('/api/requests', async (req, res) => {
 
 app.post('/api/save-request', async (req, res) => {
     try {
+        console.log('POST /api/save-request called with data:', req.body);
         const { content, sha } = await getFileContent();
         
         const requestData = {
@@ -96,12 +105,17 @@ app.post('/api/save-request', async (req, res) => {
             status: 'New'
         };
 
+        console.log('Adding new request:', requestData);
+        content.requests = content.requests || [];
         content.requests.push(requestData);
+        
+        console.log('Updating file with new content');
         await updateFileContent(content, sha);
 
+        console.log('Request saved successfully');
         res.status(201).json(requestData);
     } catch (error) {
-        console.error('Error saving request:', error);
+        console.error('Error in /api/save-request:', error);
         res.status(500).json({ 
             error: 'Failed to save request',
             details: process.env.NODE_ENV === 'development' ? error.message : undefined
