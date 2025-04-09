@@ -322,4 +322,36 @@ footer {
 
 .value-rating:not(:disabled):hover {
     border-color: var(--primary-color);
+}
+
+/* Table styles */
+.requests-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    background: var(--card-background);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.requests-table th,
+.requests-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.requests-table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.requests-table tr:hover {
+    background-color: var(--background-color);
+}
+
+.requests-table tr:last-child td {
+    border-bottom: none;
 } 
