@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const requests = await response.json();
+            console.log('Loaded requests:', requests); // Debug log
             
             const tableBody = document.getElementById('requestsTableBody');
             if (!tableBody) {
@@ -79,16 +80,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            tableBody.innerHTML = requests.map(request => `
-                <tr>
-                    <td>${formatDate(request.submissionDate || request.timestamp)}</td>
-                    <td>${request.project || request.area || '-'}</td>
-                    <td>${request.title || '-'}</td>
-                    <td>${request.status || 'New'}</td>
-                    <td>${request.priority || '-'}</td>
-                    <td>${formatBusinessValue(request)}</td>
-                </tr>
-            `).join('');
+            tableBody.innerHTML = requests.map(request => {
+                console.log('Processing request:', request); // Debug log
+                const businessValue = formatBusinessValue(request);
+                console.log('Formatted business value:', businessValue); // Debug log
+                return `
+                    <tr>
+                        <td>${formatDate(request.submissionDate || request.timestamp)}</td>
+                        <td>${request.project || request.area || '-'}</td>
+                        <td>${request.title || '-'}</td>
+                        <td>${request.status || 'New'}</td>
+                        <td>${request.priority || '-'}</td>
+                        <td class="business-value-cell">${businessValue}</td>
+                    </tr>
+                `;
+            }).join('');
 
         } catch (error) {
             console.error('Error loading requests:', error);
@@ -145,8 +151,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function formatBusinessValue(request) {
+        console.log('Formatting business value for request:', request); // Debug log
+        
         // Om det är ett äldre önskemål utan businessValueScores, visa default värde
         if (!request.businessValueScores) {
+            console.log('No businessValueScores, using default empty scores'); // Debug log
             // Skapa ett tomt objekt med alla kategorier satta till 0
             const emptyScores = {};
             categories.forEach(category => {
@@ -156,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const total = Object.values(request.businessValueScores).reduce((sum, score) => sum + score, 0);
+        console.log('Total score:', total); // Debug log
         
         // Filtrera och sortera kategorier efter poäng (högst först)
         const scoresList = Object.entries(request.businessValueScores)
@@ -168,15 +178,15 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .join('<br>');
 
+        console.log('Scores list:', scoresList); // Debug log
+
         if (total === 0) {
-            return '<div class="business-value-cell">-</div>';
+            return '-';
         }
 
         return `
-            <div class="business-value-cell">
-                <strong>Total: ${total}</strong>
-                ${scoresList ? '<br>' + scoresList : ''}
-            </div>
+            <strong>Total: ${total}</strong>
+            ${scoresList ? '<br>' + scoresList : ''}
         `;
     }
 
